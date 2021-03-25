@@ -4,7 +4,7 @@
 ## Version: 2.17
 ## APIVersion: 100034
 ## SavedVariables: RNVars RN_DEBUG_LOG
-## DependsOn: LibAddonMenu-2.0>=28 LibUnits2
+## DependsOn: LibAddonMenu-2.0>=28 LibUnits2 LibCSA
 ## OptionalDependsOn: LibGroupSocket
 
 libs/LibStub/LibStub.lua
@@ -14,8 +14,6 @@ libs/LibCustomTitles/Titles/Kyoma.lua
 libs/LibCustomTitles/Titles/Woeler.lua
 libs/LibCustomTitles/Titles/Valve.lua
 libs/LibCustomTitles/Titles/Memus.lua
-
-libs/LibCSA/LibCSA.lua
 
 UltimateHandler.lua
 TrialAetherianArchive.lua

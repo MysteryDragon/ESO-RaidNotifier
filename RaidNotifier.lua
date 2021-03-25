@@ -126,7 +126,7 @@ do ---------------------------------
 	end
 
 	local CSA  = CENTER_SCREEN_ANNOUNCE
-	local LCSA = LibStub:GetLibrary("LibCSA")
+	local LCSA = LibCSA
 
 	function RaidNotifier:AddAnnouncement(text, category, setting, interval)
 
@@ -841,7 +841,7 @@ do ----------------------
 		CALLBACK_MANAGER:RegisterCallback("OnWorldMapChanged", OnZoneChanged) -- might as well listen to this since that code is executed anyways
 
 		-- Change vitality bonus announcement to not conflict with our own
-		local LCSA = LibStub:GetLibrary("LibCSA")
+		local LCSA = LibCSA
 		LCSA:HookHandler(EVENT_RAID_REVIVE_COUNTER_UPDATE, function(messageParams, currentCount, countDelta)
 			if messageParams then
 				messageParams:SetCategory(CSA_CATEGORY_SMALL_TEXT)

@@ -23,10 +23,11 @@ Description: This library serves to provide a global  enhancement of the center 
 					Format is "function(line, messageParams, doReset)", where line is a ZO_CenterScreenAnnouncementCountdownLine object.
 ]]--
 
-local libLoaded
-local LIB_NAME, VERSION = "LibCSA", 2.1
-local lib, oldminor = LibStub:NewLibrary(LIB_NAME, VERSION)
-if not lib then return end
+local lib = {}
+LibCSA = lib
+
+LibCSA.Name = "LibCSA"
+LibCSA.Version = "2.1"
 
 local CSA = CENTER_SCREEN_ANNOUNCE
 local CSA_LINE_TYPE_COUNTDOWN = ZO_CenterScreenAnnouncementCountdownLine.GetLineType({}) -- we grab the local variable with this 'hack'
@@ -240,5 +241,11 @@ function lib:SetTickSound(soundId)
 	tickSoundId = soundId or SOUNDS.NONE
 end
 
-if(lib.Unload) then lib.Unload() end
-Load()
+local function OnAddonLoaded(_, addonName)
+	if addonName ~= LibCSA.Name then return end
+	EVENT_MANAGER:UnregisterForEvent(LibCSA.Name, EVENT_ADD_ON_LOADED)
+	if (lib.Unload) then lib.Unload() end
+	Load()
+end
+
+EVENT_MANAGER:RegisterForEvent(LibCSA.Name, EVENT_ADD_ON_LOADED, OnAddonLoaded)
