@@ -1,7 +1,7 @@
 local MY_MODULE_NAME = "Kyoma"
 local MY_MODULE_VERSION = 10
 
-local LCC = LibStub('LibCustomTitlesRN')
+local LCC = LibCustomTitlesRN
 if not LCC then return end
 
 local MY_MODULE = LCC:RegisterModule(MY_MODULE_NAME, MY_MODULE_VERSION)

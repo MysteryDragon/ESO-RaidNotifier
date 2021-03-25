@@ -6,9 +6,8 @@ Total: 115 titles
 ]]--
 
 local libLoaded
-local LIB_NAME, VERSION = "LibTitleLocale", 4
-local lib, oldminor = LibStub:NewLibrary(LIB_NAME, VERSION)
-if not lib then return end
+local LIB_NAME = "LibTitleLocale"
+local lib = {}
 
 local LocaleTitles =
 {
@@ -754,5 +753,14 @@ local function Load()
 	lib.Unload = Unload
 end
 
-if(lib.Unload) then lib.Unload() end
-Load()
+local function OnAddonLoaded(_, addonName)
+    if not libLoaded then
+        -- TODO It's best to check addonName instead, but it requires to add manifest to this library
+        libLoaded = true
+        EVENT_MANAGER:UnregisterForEvent(LIB_NAME, EVENT_ADD_ON_LOADED)
+        if (lib.Unload) then lib.Unload() end
+        Load()
+    end
+end
+
+EVENT_MANAGER:RegisterForEvent(LIB_NAME, EVENT_ADD_ON_LOADED, OnAddonLoaded)
