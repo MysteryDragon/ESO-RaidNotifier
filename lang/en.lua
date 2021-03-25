@@ -58,7 +58,7 @@ L.Binding_ToggleUltimateExchange                    = "Toggle Ultimate"
 --------------------------------
 L.Settings_Ultimate_Header                           = "Ultimate Exchange (beta)"
 L.Settings_Ultimate_Description                      = "This feature allows you to send your ultimate to your teammates so they can see how close you are to casting it. It uses your cost based on whatever cost reduction you might have from sets or passives."
--- Settings 
+-- Settings
 L.Settings_Ultimate_Enabled                          = "Enabled"
 L.Settings_Ultimate_Enabled_TT                       = "Enable the sharing and receiving of ultimate values. It is always disabled outside of trials."
 L.Settings_Ultimate_Hidden                           = "Hidden"
@@ -155,7 +155,7 @@ L.Settings_Archive_Overcharge                       = "Mobs: Overcharge"
 L.Settings_Archive_Overcharge_TT                    = "Alerts you when an Overcharger targets you with his Overcharge ability."
 L.Settings_Archive_Call_Lightning                   = "Mobs: Call Lightning"
 L.Settings_Archive_Call_Lightning_TT                = "Alerts you when an Overcharger targets you with his Call Lightning ability."
--- Alerts 
+-- Alerts
 L.Alerts_Archive_StormAtro_ImpendingStorm           = "Incoming |cFF0000Impending Storm|r!"
 L.Alerts_Archive_StormAtro_LightningStorm           = "Incoming |cfef92eLightning Storm|r! Go into the light!"
 L.Alerts_Archive_StoneAtro_BoulderStorm             = "Incoming |cFF0000Boulder Storm|r! Block to avoid knockback!"
@@ -352,7 +352,7 @@ L.Settings_HallsFab_Scalded_Debuff_TT               = "Displays a small status i
 L.Settings_HallsFab_Overcharge_Aura                 = "Committee: Overcharging Aura"
 L.Settings_HallsFab_Overcharge_Aura_TT              = "Alerts you when reclaimer start overcharging aura."
 L.Settings_HallsFab_Overpower_Auras                 = "Committee: Overpowering Auras"
-L.Settings_HallsFab_Overpower_Auras_TT              = "Alerts you when the tanks need to swap the committee bosses" 
+L.Settings_HallsFab_Overpower_Auras_TT              = "Alerts you when the tanks need to swap the committee bosses"
 L.Settings_HallsFab_Overpower_Auras_Duration        = "       - Countdown Duration"
 L.Settings_HallsFab_Overpower_Auras_Duration_TT     = "The duration of the countdown in milliseconds."
 L.Settings_HallsFab_Overpower_Auras_Dynamic         = "       - Dynamic Countdown"
@@ -605,7 +605,7 @@ function RaidNotifier:MissingLocale()
 	d("Obviously not missing any english strings....")
 end
 
---if (GetCVar('language.2') == 'de') then 
+--if (GetCVar('language.2') == 'de') then
 --	local MissingL = {}
 --	for k, v in pairs(RaidNotifier:GetLocale()) do
 --		if (not L[k]) then
@@ -613,10 +613,10 @@ end
 --			L[k] = v
 --		end
 --	end
---	function RaidNotifier:GetLocale() 
+--	function RaidNotifier:GetLocale()
 --		return L
 --	end
---	-- for debugging 
+--	-- for debugging
 --	function RaidNotifier:MissingLocale()
 --		df("Missing strings for '%s'", GetCVar('language.2'))
 --		d(MissingL)

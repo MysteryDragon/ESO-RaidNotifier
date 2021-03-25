@@ -111,7 +111,7 @@ sanctum.spreading_poison[52036] = 1  -- \\                                      
 sanctum.spreading_poison[58663] = 1  --  >>  Cast 1.9s, Enemy, 28m Range
 sanctum.spreading_poison[82591] = 1  -- //
 sanctum.spreading_poison[54419] = 2  -- \\                                         (the actual poison)
-sanctum.spreading_poison[58669] = 2  --  >> Instant Cast, Enemy, 28m Range, 2.5s 
+sanctum.spreading_poison[58669] = 2  --  >> Instant Cast, Enemy, 28m Range, 2.5s
 sanctum.spreading_poison[82597] = 2  -- //
 sanctum.spreading_poison[54420] = 3  -- Instant Cast, Area, 3.5m Radius
 sanctum.spreading_poison[80794] = 4  -- Cast 1.9s, Cone??, 0m Range??, 28m Radius
@@ -173,7 +173,7 @@ maw_lorkhaj.zhajBoss_curseduration = 25
 maw_lorkhaj.zhajBoss_glyphability  = 57525
 maw_lorkhaj.zhajBoss_glyphcooldown = 25
 maw_lorkhaj.zhajBoss_knownGlyphs = {}
-maw_lorkhaj.zhajBoss_glyphs = 
+maw_lorkhaj.zhajBoss_glyphs =
 {
 	{x=0.55496829748154, y=0.29175475239754},
 	{x=0.56342494487762, y=0.25405216217041},
@@ -183,7 +183,7 @@ maw_lorkhaj.zhajBoss_glyphs =
 	{x=0.62508809566498, y=0.32699084281921},
 }
 
---False Moon Twins, S’Kinrai and Vashai 
+--False Moon Twins, S’Kinrai and Vashai
 --   Holy Aspect
 maw_lorkhaj.twinBoss_lunaraspect = {}
 maw_lorkhaj.twinBoss_lunaraspect[59472] = true
@@ -318,7 +318,7 @@ halls_fab.hunters_spawn_sphere         = 90414
 -- Pinnacle Factotum (2nd boss)
 halls_fab.pinnacleBoss_fluxburst       = 90755 -- the streak-like attack
 halls_fab.pinnacleBoss_conduit_spawn   = 91781 -- sadly not targeted on somebody
-halls_fab.pinnacleBoss_conduit_drain   = 91792 
+halls_fab.pinnacleBoss_conduit_drain   = 91792
 halls_fab.pinnacleBoss_scalded_debuff  = 90916
 
 -- Refabrication Committee (4th bosses)
@@ -403,7 +403,7 @@ asylum.interest_list[99990] = true
 -- "Enrage", called when bosses enrage, 2240 on start, 2250 on stop (also when they go to sleep), seems to repeat each 20s (does that mean the enrage stacks up?), tUnitId == boss-in-question
 asylum.interest_list[101354] = true
  -- easy debugging when put here (see above for what these do)
-asylum.interest_list[64508] = true 
+asylum.interest_list[64508] = true
 
 RaidNotifier.BuffsDebuffs[RAID_ASYLUM_SANCTORIUM] = asylum
 
@@ -527,12 +527,12 @@ sunspire.focus_fire_tick = { -- remove
 }
 -- Lokkestiiz ice boss
 sunspire.door_protection_ice = 120417 -- 2200
-sunspire.frozen_tomb = 119632 
+sunspire.frozen_tomb = 119632
 sunspire.frozen_tomb_wipe_time = 60000
 
 sunspire.fire_trail = 122727 -- lighting breath while flying mechanic
 sunspire.raid_mr3_conjuredReflection = 124051
-sunspire.frozen_prison = 124335  
+sunspire.frozen_prison = 124335
 sunspire.storm_fury  = {
 	[115871] = true,
 	[115702] = true,
@@ -567,7 +567,7 @@ sunspire.translation_apocalypse = 121436
 	2240 time shift 124280
 	laduje portal na prawo (od startu okolo 3 sek)
 	2245 time shift 121502
-	
+
 ]]
 
 sunspire.negate_field = 121411 -- 2200 hitvalue

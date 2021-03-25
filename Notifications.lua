@@ -19,7 +19,7 @@ function AbstractNotification:Init(type, id, parent)
 	self.type = type
 end
 
-function AbstractNotification:GetType() 
+function AbstractNotification:GetType()
 	return self.type
 end
 
@@ -69,9 +69,9 @@ function AbstractNotification:_runTimer(ms, f)
 		if (self.displayTime <= 0) then
 			self:SetHidden(true)
 			self.freeToUse = true
-			--dbg("Hiding: "..self.id)				
+			--dbg("Hiding: "..self.id)
 			EVENT_MANAGER:UnregisterForUpdate("RNNotification_" .. self.id)
-		end			
+		end
 	end)
 end
 
@@ -131,9 +131,9 @@ function Notification:Show(text)
 	self:SetHidden(false)
 	self:SetText(text)
 	self.freeToUse = false
-	
+
 	self:runTimer(1000)
-	
+
 	return self.id
 end
 
@@ -146,16 +146,16 @@ function CountdownNotification:New(...)
 end
 
 function CountdownNotification:Initialize(id, parent)
-	self.ctrl = WINDOW_MANAGER:CreateControl("RNotification"..id, self.parent)	
-	
+	self.ctrl = WINDOW_MANAGER:CreateControl("RNotification"..id, self.parent)
+
 	self.ctrl.label = WINDOW_MANAGER:CreateControl("RNotification"..id.."Label", self.ctrl, CT_LABEL)
 	self.ctrl.label:SetAnchor(TOP, self.ctrl, LEFT, 0, 0)
 	self.ctrl.label:SetFont('ZoFontCenterScreenAnnounceSmall')
-	
+
 	self.ctrl.counter = WINDOW_MANAGER:CreateControl("RNotification"..id.."Counter", self.ctrl, CT_LABEL)
 	self.ctrl.counter:SetAnchor(LEFT, self.ctrl.label, RIGHT, 20, 0)
 	self.ctrl.counter:SetFont('ZoFontCenterScreenAnnounceLarge')
-	
+
 	self.fadeInAnimation = GetAnimationManager():CreateTimelineFromVirtual("CenterAnnounceFadeIn", self.ctrl)
 	self.countdownAnimation = GetAnimationManager():CreateTimelineFromVirtual("CenterAnnounceCountdownLoop", self.ctrl.counter)
 end
@@ -176,7 +176,7 @@ function CountdownNotification:SetScale(scale)
 	local startScale = firstAnimation:GetStartScale()
 	local endScale = firstAnimation:GetEndScale()
 	firstAnimation:SetScaleValues(1.1 * self.scale, 1.5 * self.scale) -- TODO Get base scale from xml
-	
+
 	local secondAnimation = self.countdownAnimation:GetAnimation(2)
 	local startScale = secondAnimation:GetStartScale()
 	local endScale = secondAnimation:GetEndScale()
@@ -233,12 +233,12 @@ function NotificationsPool:Initialize(displayTime, parent)
 	else
 		self.parent = parent
 	end
-	
+
 	dbg = RaidNotifier.dbg
-	
+
 --	self.bg = WINDOW_MANAGER:CreateControl(nil, self.parent, CT_BACKDROP)
 --	self.bg:SetAnchorFill(self.parent)
---	self.bg:SetEdgeTexture(nil, 1, 1, 0.5, 0.5)	
+--	self.bg:SetEdgeTexture(nil, 1, 1, 0.5, 0.5)
 end
 
 local pool = nil
@@ -267,7 +267,7 @@ function NotificationsPool:Add(text, displayTime, isCountdown)
 	local notify = nil
 	for i = 1, #self.pool, 1 do
 		if (self.pool[i]:IsFreeToUse()) then
-			if ((self.pool[i]:GetType() == AbstractNotification.COUNTDOWN and isCountdown) 
+			if ((self.pool[i]:GetType() == AbstractNotification.COUNTDOWN and isCountdown)
 			or  (self.pool[i]:GetType() == AbstractNotification.NOTIFY and not isCountdown)) then
 				--dbg("Used already created notification "..self.pool[i]:GetId())
 				notify = self.pool[i]
@@ -283,19 +283,19 @@ function NotificationsPool:Add(text, displayTime, isCountdown)
 		else
 			notify = Notification:New(id, self.parent)
 		end
-		
+
 		notify:SetText("X") -- we need anything to get text height
 		self.pool[id] = notify
 		--dbg("Created new notification "..id)
 	end
-	
+
 	if (self.scale) then
 		notify:SetScale(self.scale)
-	end	
-		
+	end
+
 	notify:SetDisplayTime(displayTime and displayTime or self.displayTime)
-	
-	table.sort(self.pool, function(a,b) 
+
+	table.sort(self.pool, function(a,b)
 		if (a:GetEndTime() < b:GetEndTime()) then
 			return true
 --		elseif (a:GetEndTime() > b:GetEndTime()) then
@@ -315,7 +315,7 @@ function NotificationsPool:Add(text, displayTime, isCountdown)
 	return notify:Show(text, self.precise)
 end
 
-function NotificationsPool:Stop(id) 
+function NotificationsPool:Stop(id)
 	if (id == nil or (id <= #self.pool and id > 0)) then
 		for i = 1, #self.pool, 1 do
 			if (self.pool[i]:GetId() == id or id == nil) then

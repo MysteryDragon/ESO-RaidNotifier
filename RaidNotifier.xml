@@ -25,7 +25,7 @@
 	<Controls>
 		<Control name="RaidNotifierGlyphTemplate" virtual="true">
 			<Dimensions x="58" y="58" />
-			<Controls> 
+			<Controls>
 				<Texture name="$(parent)BG" textureFile="RaidNotifier/assets/glyph_background.dds" hidden="false">
 					<AnchorFill />
 				</Texture>
@@ -36,7 +36,7 @@
 					<Anchor point="CENTER" relativeTo="$(parent)BG" />
 				</Label>
 			</Controls>
-		</Control>		
+		</Control>
 		<Button name="RaidNotifier_ConfigButton" mouseOverBlendMode="ADD" inherits="ZO_ButtonBehaviorClickSound" virtual="true">
 			<Dimensions x="32" y="32" />
 			<Textures
@@ -47,11 +47,11 @@
 			<OnMouseEnter>
 				ZO_Options_OnMouseEnter(self)
 			</OnMouseEnter>
-			
+
 			<OnMouseExit>
 				ZO_Options_OnMouseExit(self)
 			</OnMouseExit>
-		</Button>	
+		</Button>
 		<TopLevelControl name="RaidNotifier_ConfigDialog" inherits="ZO_CustomDialogBase" hidden="true">
 			<Controls>
 				<Label name="$(parent)Text" inherits="ZO_DialogContentAnchors" color="INTERFACE_COLOR_TYPE_TEXT_COLORS:INTERFACE_TEXT_COLOR_NORMAL" font="ZoFontGame"/>
@@ -103,7 +103,7 @@
 							<Anchor point="TOPLEFT" offsetX="8" offsetY="8" text="TMP42" />
 						</Label>
 					</Controls>
-				</Control>	
+				</Control>
 				<Texture name="$(parent)StatusDisplay" movable="true" mouseEnabled="true" hidden="true" clampedToScreen="true">
 					<Dimensions x="64" y="64" />
 					<Anchor point="TOPLEFT" relativeTo="RaidNotifierUI" offsetX="0" offsetY="80" />
@@ -136,7 +136,7 @@
 
 					<Controls>
 						<Backdrop name="$(parent)BG" inherits="ZO_DefaultBackdrop"/>
-						
+
 						<Control name="$(parent)Glyph1" inherits="RaidNotifierGlyphTemplate">
 							<Anchor point="CENTER" offsetX="90" offsetY="-60" />
 						</Control>

@@ -23,7 +23,7 @@ local function FindGlyph(glyphId, glyphs, knownGlyphs, allowNew)
 					local pX, pY = GetMapPlayerPosition("group"..p)
 					if (knownGlyphs[index] == nil) then --only check unknown glyphs
 						-- we dont care about scale/factor or how much it is in actual meters
-						local distance = RaidNotifier.Util.GetRawDistance(pX,pY, data.x,data.y) * 1000 
+						local distance = RaidNotifier.Util.GetRawDistance(pX,pY, data.x,data.y) * 1000
 						if (distance < lowestDistance) then
 							lowestDistance=distance
 							lowestIndex=index
@@ -49,7 +49,7 @@ end
 function RaidNotifier.MOL.OnBossesChanged()
 	local self   = RaidNotifier
 	local raidId = RaidNotifier.raidId
-	local buffsDebuffs, settings = self.BuffsDebuffs[raidId], self.Vars.mawLorkhaj	
+	local buffsDebuffs, settings = self.BuffsDebuffs[raidId], self.Vars.mawLorkhaj
 
 	local bossCount, bossAlive, bossFull = self:GetNumBosses(true)
 
@@ -61,9 +61,9 @@ function RaidNotifier.MOL.OnBossesChanged()
 			self:SetElementHidden("mawLorkhaj", "zhaj_glyph_window", false)
 		end
 	elseif (bossCount == 2 and map == "Art/maps/reapersmarch/MawLorkajSuthaySanctuary_Base_0.dds") then -- False Moon Twins, S’Kinrai and Vashai
-		
+
 	elseif (bossCount == 1 and map == "Art/maps/reapersmarch/MawLorkajSevenRiddles_Base_0.dds") then
-	
+
 	end
 end
 
@@ -104,12 +104,12 @@ function RaidNotifier.MOL.OnCombatEvent(_, result, isError, aName, aGraphic, aAc
 		tName = self.UnitIdToString(tUnitId)
 	end
 
-	--Zhaj'hassa the Forgotten 
+	--Zhaj'hassa the Forgotten
 	-- Glyphs & Curse (UI elements only, notification code is further down below)
 	if settings.zhaj_glyphs then
 		if (abilityId == buffsDebuffs.zhajBoss_glyphability) then
 			local findNew = (result == ACTION_RESULT_EFFECT_FADED) --only scan for new glyph when effect/glyph is used by the player, NOT when it respawns
-			local glyphIndex = FindGlyph(tUnitId, buffsDebuffs.zhajBoss_glyphs, buffsDebuffs.zhajBoss_knownGlyphs, findNew) 
+			local glyphIndex = FindGlyph(tUnitId, buffsDebuffs.zhajBoss_glyphs, buffsDebuffs.zhajBoss_knownGlyphs, findNew)
 			if (result == ACTION_RESULT_EFFECT_GAINED_DURATION) then
 				self:StopGlyphTimer(glyphIndex)
 			elseif (result == ACTION_RESULT_EFFECT_FADED) then
@@ -117,7 +117,7 @@ function RaidNotifier.MOL.OnCombatEvent(_, result, isError, aName, aGraphic, aAc
 			end
 		elseif (tType == COMBAT_UNIT_TYPE_PLAYER and abilityId == buffsDebuffs.zhajBoss_curseability) then
 			local glyphIndex = 7
-			if (result == ACTION_RESULT_EFFECT_GAINED_DURATION) then 
+			if (result == ACTION_RESULT_EFFECT_GAINED_DURATION) then
 				self:StartGlyphTimer(glyphIndex, buffsDebuffs.zhajBoss_curseduration)
 			elseif (result == ACTION_RESULT_EFFECT_FADED) then
 				self:StopGlyphTimer(glyphIndex)
@@ -129,7 +129,7 @@ function RaidNotifier.MOL.OnCombatEvent(_, result, isError, aName, aGraphic, aAc
 		--Sun-Eater Eclipse Field
 		if (abilityId == buffsDebuffs.suneater_eclipse) then
 			if settings.suneater_eclipse >= 1 then
-				if (tType == COMBAT_UNIT_TYPE_PLAYER) then 
+				if (tType == COMBAT_UNIT_TYPE_PLAYER) then
 					self:AddAnnouncement(GetString(RAIDNOTIFIER_ALERTS_MAWLORKHAJ_SUNEATER_ECLIPSE), "mawLorkhaj", "suneater_eclipse")
 				elseif (tName ~= "" and settings.suneater_eclipse >= 2) then -- removed the distance check for now
 					self:AddAnnouncement(zo_strformat(GetString(RAIDNOTIFIER_ALERTS_MAWLORKHAJ_SUNEATER_ECLIPSE_OTHER), tName), "mawLorkhaj", "suneater_eclipse")
@@ -157,7 +157,7 @@ function RaidNotifier.MOL.OnCombatEvent(_, result, isError, aName, aGraphic, aAc
 			end
 		end
 	elseif (result == ACTION_RESULT_EFFECT_GAINED_DURATION) then
-		if (tType == COMBAT_UNIT_TYPE_PLAYER) then 
+		if (tType == COMBAT_UNIT_TYPE_PLAYER) then
 			--Grip of Lorkhaj (1st boss debuff)
 			if (buffsDebuffs.zhaj_gripoflorkhaj[abilityId]) then
 				if settings.zhaj_gripoflorkhaj then
@@ -165,7 +165,7 @@ function RaidNotifier.MOL.OnCombatEvent(_, result, isError, aName, aGraphic, aAc
 				end
 			end
 
-			-- False Moon Twins, S’Kinrai and Vashai 
+			-- False Moon Twins, S’Kinrai and Vashai
 			if (buffsDebuffs.twinBoss_lunaraspect[abilityId]) then
 				if settings.twinBoss_aspects >= 2 then
 					self:AddAnnouncement(GetString(RAIDNOTIFIER_ALERTS_MAWLORKHAJ_LUNAR_ASPECT), "mawLorkhaj", "twinBoss_aspects", 4)
@@ -206,7 +206,7 @@ function RaidNotifier.MOL.OnCombatEvent(_, result, isError, aName, aGraphic, aAc
 		--Rakkhat, Fang of Lorkhaj
 		if (abilityId == buffsDebuffs.rakkhat_unstablevoid) then
 			if settings.rakkhat_unstablevoid >= 1 then
-				if (tType == COMBAT_UNIT_TYPE_PLAYER) then 
+				if (tType == COMBAT_UNIT_TYPE_PLAYER) then
 					if (settings.rakkhat_unstablevoid == 1 and settings.rakkhat_unstablevoid_countdown) then
 						self:StartCountdown(buffsDebuffs.rakkhat_unstablevoid_duration, GetString(RAIDNOTIFIER_ALERTS_MAWLORKHAJ_RAKKHAT_UNSTABLE_VOID), "mawLorkhaj", "rakkhat_unstablevoid")
 					else
@@ -222,7 +222,7 @@ function RaidNotifier.MOL.OnCombatEvent(_, result, isError, aName, aGraphic, aAc
 		--			if (settings.rakkhat_lunarbastion1 == 1 or settings.rakkhat_lunarbastion1 == 3) then --if "Self" or "All"
 		--				self:AddAnnouncement(GetString(RAIDNOTIFIER_ALERTS_MAWLORKHAJ_RAKKHAT_LUNARBASTION1), "mawLorkhaj", "rakkhat_lunarbastion1")
 		--			end
-		--		elseif (tName ~= "") then 
+		--		elseif (tName ~= "") then
 		--			if (settings.rakkhat_lunarbastion1 == 2 or settings.rakkhat_lunarbastion1 == 3) then --if "Other" or "All"
 		--				self:AddAnnouncement(zo_strformat(GetString(RAIDNOTIFIER_ALERTS_MAWLORKHAJ_RAKKHAT_LUNARBASTION1_OTHER), tName), "mawLorkhaj", "rakkhat_lunarbastion1")
 		--			end
@@ -256,7 +256,7 @@ function RaidNotifier.MOL.OnCombatEvent(_, result, isError, aName, aGraphic, aAc
 		--			if (settings.rakkhat_lunarbastion2 == 1 or settings.rakkhat_lunarbastion2 == 3) then --if "Self" or "All"
 		--				self:AddAnnouncement(GetString(RAIDNOTIFIER_ALERTS_MAWLORKHAJ_RAKKHAT_LUNARBASTION2), "mawLorkhaj", "rakkhat_lunarbastion2")
 		--			end
-		--		elseif (tName ~= "") then 
+		--		elseif (tName ~= "") then
 		--			if (settings.rakkhat_lunarbastion2 == 2 or settings.rakkhat_lunarbastion2 == 3) then --if "Other" or "All"
 		--				self:AddAnnouncement(zo_strformat(GetString(RAIDNOTIFIER_ALERTS_MAWLORKHAJ_RAKKHAT_LUNARBASTION2_OTHER), tName), "mawLorkhaj", "rakkhat_lunarbastion2")
 		--			end

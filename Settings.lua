@@ -33,11 +33,11 @@ do ------------------
 		-- [3] = true, -- Tank
 	-- }
 
-	-- local defaults = 
+	-- local defaults =
 	-- {
 		-- useAccountWide = true, --very special setting!!
 
-		-- general = 
+		-- general =
 		-- { -- no need for advanced settings
 			-- buffFood_reminder           = true,
 			-- buffFood_reminder_interval  = 60,
@@ -47,7 +47,7 @@ do ------------------
 			-- last_pet                    = 0,
 			-- default_sound               = SOUNDS.CHAMPION_POINTS_COMMITTED,
 		-- },
-		-- ultimate = 
+		-- ultimate =
 		-- { -- no need for advanced settings
 			-- enabled                     = false,
 			-- hidden                      = false,
@@ -60,7 +60,7 @@ do ------------------
 			-- override_cost               = 0,
 		-- },
 
-		-- helra = 
+		-- helra =
 		-- {
 			-- warrior_stoneform           = {value = 1, --[[Self]]       sound = DEFAULT_SOUND,    priority = DEFAULT_PRIORITY,    roles = ALL_ROLES},
 		-- },
@@ -84,7 +84,7 @@ do ------------------
 			-- overcharge                  = {value = 0, --[[Off]]        sound = DEFAULT_SOUND,    priority = DEFAULT_PRIORITY},
 			-- call_lightning              = {value = 1, --[[Self]]       sound = DEFAULT_SOUND,    priority = DEFAULT_PRIORITY},
 		-- },
-		-- dragonstar = 
+		-- dragonstar =
 		-- {
 			-- general_taking_aim          = {value = false,              sound = DEFAULT_SOUND,    priority = DEFAULT_PRIORITY},
 			-- general_crystal_blast       = {value = true,               sound = DEFAULT_SOUND,    priority = DEFAULT_PRIORITY},
@@ -112,7 +112,7 @@ do ------------------
 			-- stage7_poison               = {value = true,               sound = DEFAULT_SOUND,    priority = DEFAULT_PRIORITY},
 			-- stage9_synergy              = {value = true,               sound = DEFAULT_SOUND,    priority = DEFAULT_PRIORITY},
 		-- },
-		-- hallsFab = 
+		-- hallsFab =
 		-- {
 			-- conduit_strike              = {value = true,               sound = DEFAULT_SOUND,    priority = DEFAULT_PRIORITY},
 			-- taking_aim                  = {value = 1, --[[Self]]       sound = DEFAULT_SOUND,    priority = DEFAULT_PRIORITY,    roles = ALL_ROLES},
@@ -125,9 +125,9 @@ do ------------------
 			-- committee_auras_dynamic     = {value = false,              }, -- TODO: combine with "committee_auras" as dropdown once fully tested
 			-- committee_fabricant_spawn   = {value = false,              sound = DEFAULT_SOUND,    priority = DEFAULT_PRIORITY},
 			-- committee_reclaim_achieve   = {value = false,              sound = DEFAULT_SOUND,    priority = DEFAULT_PRIORITY},
-		-- }, 
+		-- },
 
-		-- dbg = 
+		-- dbg =
 		-- { -- no need for advanced settings
 			-- enable                      = false,
 			-- notify                      = false,
@@ -138,10 +138,10 @@ do ------------------
 			-- devMode                     = false,
 		-- },
 	-- }
-	
+
 	local defaults = {
-		dLog = {}, 
-		useAccountWide = true, 
+		dLog = {},
+		useAccountWide = true,
 		general = {
 			buffFood_reminder = true,
 			buffFood_reminder_interval = 60,
@@ -214,7 +214,7 @@ do ------------------
 			rakkhat_unstablevoid_countdown = false,
 			rakkhat_threshingwings = true,
 			rakkhat_darknessfalls = false,
-			rakkhat_darkbarrage = false, 
+			rakkhat_darkbarrage = false,
 			rakkhat_lunarbastion1 = 0, -- "Off"
 			rakkhat_lunarbastion2 = 0, -- "Off"
 			hulk_armorweakened = false,
@@ -230,7 +230,7 @@ do ------------------
 			stage9_synergy = true,
 		},
 		hallsFab = {
-			conduit_strike        = true, 
+			conduit_strike        = true,
 			taking_aim            = 1, -- "Self"
 			taking_aim_dynamic    = 1, -- "Normal"
 			taking_aim_duration   = 5000,
@@ -248,7 +248,7 @@ do ------------------
 			committee_overpower_auras_duration = 9000,
 			committee_fabricant_spawn = false,
 			committee_reclaim_achieve = false,
-		}, 
+		},
 		asylum = {
 			llothis_defiling_blast = 1, -- "Self"
 			llothis_soul_stained_corruption = false,
@@ -268,7 +268,7 @@ do ------------------
 			hoarfrost = 0, -- "Off"
 			hoarfrost_shed = true,
 			hoarfrost_countdown = true,
-			heavy_attack = 0, -- "Off"			
+			heavy_attack = 0, -- "Off"
 			chilling_comet = true,
 			baneful_barb = 0, -- "Off"
 			roaring_flare = 2, -- "Full"
@@ -317,7 +317,7 @@ do ------------------
 		else -- we passed the category itself already
 			return settings[category]
 		end
-		
+
 	end
 
 	function RaidNotifier:GetDefaults()
@@ -433,35 +433,35 @@ function RaidNotifier:CreateSettingsMenu()
 
 	local off_self_all = {
 		L.Settings_General_Choices_Off,
-		L.Settings_General_Choices_Self, 
-		L.Settings_General_Choices_All, 
+		L.Settings_General_Choices_Self,
+		L.Settings_General_Choices_All,
 	}
 	local choices = {
 		mawLorkhaj = {
 			twinBoss_aspects = {
 				L.Settings_General_Choices_Off,
-				L.Settings_General_Choices_Minimal, 
+				L.Settings_General_Choices_Minimal,
 				L.Settings_General_Choices_Normal,
-				L.Settings_General_Choices_Full, 
+				L.Settings_General_Choices_Full,
 			},
 			shattering_strike = off_self_all,
 			rakkhat_unstablevoid = off_self_all,
 			rakkhat_lunarbastion1 = {
 				L.Settings_General_Choices_Off,
-				L.Settings_General_Choices_Self, 
+				L.Settings_General_Choices_Self,
 				L.Settings_General_Choices_Other,
-				L.Settings_General_Choices_All, 
+				L.Settings_General_Choices_All,
 			},
 			rakkhat_lunarbastion2 = {
 				L.Settings_General_Choices_Off,
-				L.Settings_General_Choices_Self, 
+				L.Settings_General_Choices_Self,
 				L.Settings_General_Choices_Other,
-				L.Settings_General_Choices_All, 
+				L.Settings_General_Choices_All,
 			},
 			suneater_eclipse = {
 				L.Settings_General_Choices_Off,
 				L.Settings_General_Choices_Self,
-				L.Settings_General_Choices_Near, 
+				L.Settings_General_Choices_Near,
 				L.Settings_General_Choices_All,
 			},
 		},
@@ -501,7 +501,7 @@ function RaidNotifier:CreateSettingsMenu()
 			draining_ballista = off_self_all,
 		},
 		asylum = {
-			llothis_defiling_blast = off_self_all, 
+			llothis_defiling_blast = off_self_all,
 			felms_teleport_strike = off_self_all,
 			olms_eruption = off_self_all,
 		},
@@ -567,10 +567,10 @@ function RaidNotifier:CreateSettingsMenu()
 	local function MakeControlEntry(data, category, key)
 
 		if (category ~= nil and key ~= nil) then
-			-- for the majority of the settings 
+			-- for the majority of the settings
 			data.category = category
 			data.key      = key
-			
+
 			-- build simple table with zero-based values for choices
 			if data.choices and not data.choicesValues then
 				data.choicesValues = {}
@@ -593,7 +593,7 @@ function RaidNotifier:CreateSettingsMenu()
 				index = index + 1
 				data.reference = "RNSettingCtrl"..index
 			end
-			
+
 			-- add get/set functions if they were not provided
 			if not data.getFunc then
 				data.getFunc = function() return getValue(data.category, data.key) end
@@ -657,11 +657,11 @@ function RaidNotifier:CreateSettingsMenu()
 			L.Settings_General_Choices_Major_Announcement,
 			L.Settings_General_Choices_Custom_Announcement,
 		}, choicesValues = {
-			CSA_CATEGORY_SMALL_TEXT, 
+			CSA_CATEGORY_SMALL_TEXT,
 			--CSA_CATEGORY_LARGE_TEXT,
 			CSA_CATEGORY_MAJOR_TEXT,
 			0,
-		}, 
+		},
 		noAlert = true,
 	}, "general", "use_center_screen_announce")
 	MakeControlEntry({
@@ -676,7 +676,7 @@ function RaidNotifier:CreateSettingsMenu()
 		min = 70, max = 150, step = 5,
 		noAlert = true,
 		disabled = function() return savedVars.general.use_center_screen_announce ~= 0 end,
-	}, "general", "notifications_scale")	
+	}, "general", "notifications_scale")
 	MakeControlEntry({
 		type = "button",
 		name = L.Settings_General_Notifications_Showcase,
@@ -745,7 +745,7 @@ function RaidNotifier:CreateSettingsMenu()
 		noAlert = true,
 		scrollable = true,
 	}, "general", "default_sound")
-	
+
 	-- moved here for easier access
 	MakeControlEntry({
 		type = "checkbox",
@@ -764,8 +764,8 @@ function RaidNotifier:CreateSettingsMenu()
 		getFunc = function() return savedVars.ultimate.enabled end,
 		setFunc = function(value)
 				savedVars.ultimate.enabled = value
-				if self.raidId > 0 then 
-					if value then 
+				if self.raidId > 0 then
+					if value then
 						self:RegisterForUltimateChanges()
 					else
 						self:UnregisterForUltimateChanges()
@@ -780,7 +780,7 @@ function RaidNotifier:CreateSettingsMenu()
 		tooltip = L.Settings_Ultimate_Hidden_TT,
 		getFunc = function() return savedVars.ultimate.hidden end,
 		setFunc = function(value)
-				savedVars.ultimate.hidden = value 
+				savedVars.ultimate.hidden = value
 				self:SetElementHidden("ultimate", "ulti_window", value)
 			end,
 		default = false,
@@ -791,7 +791,7 @@ function RaidNotifier:CreateSettingsMenu()
 		tooltip = L.Settings_Ultimate_UseColor_TT,
 		getFunc = function() return savedVars.ultimate.useColor end,
 		setFunc = function(value)
-				savedVars.ultimate.useColor = value 
+				savedVars.ultimate.useColor = value
 				self:UpdateUltimates()
 			end,
 		default = true,
@@ -802,7 +802,7 @@ function RaidNotifier:CreateSettingsMenu()
 		tooltip = L.Settings_Ultimate_UseDisplayName_TT,
 		getFunc = function() return savedVars.ultimate.useDisplayName end,
 		setFunc = function(value)
-				savedVars.ultimate.useDisplayName = value 
+				savedVars.ultimate.useDisplayName = value
 				self:UpdateUltimates()
 			end,
 		default = false,
@@ -813,7 +813,7 @@ function RaidNotifier:CreateSettingsMenu()
 		tooltip = L.Settings_Ultimate_ShowHealers_TT,
 		getFunc = function() return savedVars.ultimate.showHealers end,
 		setFunc = function(value)
-				savedVars.ultimate.showHealers = value 
+				savedVars.ultimate.showHealers = value
 				self:UpdateUltimates()
 			end,
 		default = true,
@@ -824,7 +824,7 @@ function RaidNotifier:CreateSettingsMenu()
 		tooltip = L.Settings_Ultimate_ShowTanks_TT,
 		getFunc = function() return savedVars.ultimate.showTanks end,
 		setFunc = function(value)
-				savedVars.ultimate.showTanks = value 
+				savedVars.ultimate.showTanks = value
 				self:UpdateUltimates()
 			end,
 		default = true,
@@ -835,7 +835,7 @@ function RaidNotifier:CreateSettingsMenu()
 		tooltip = L.Settings_Ultimate_ShowDps_TT,
 		getFunc = function() return savedVars.ultimate.showDps end,
 		setFunc = function(value)
-				savedVars.ultimate.showDps = value 
+				savedVars.ultimate.showDps = value
 				self:UpdateUltimates()
 			end,
 		default = false,
@@ -879,7 +879,7 @@ function RaidNotifier:CreateSettingsMenu()
 			10,
 			5,
 			2,
-		}, 
+		},
 		getFunc = function()
 			return savedVars.countdown.timerPrecise
 		end,
@@ -889,12 +889,12 @@ function RaidNotifier:CreateSettingsMenu()
 			ReloadUI()
 		end,
 		noAlert = true,
-	}, "countdown", "timerPrecise")	
+	}, "countdown", "timerPrecise")
 	MakeControlEntry({
 		type = "checkbox",
 		name = L.Settings_Countdown_UseColors,
 		tooltip = L.Settings_Countdown_UseColors_TT,
-		noAlert = true, 
+		noAlert = true,
 	}, "countdown", "useColor")
 	subTable = nil --end submenu
 
@@ -906,9 +906,9 @@ function RaidNotifier:CreateSettingsMenu()
 		tooltip = RAIDNOTIFIER_SETTINGS_PROFILE_USEGLOBAL_TT,
 		warning = L.Settings_Profile_UseGlobal_Warning,
 		getFunc = function()
-			return RNVars.Default[GetDisplayName()]["$AccountWide"].useAccountWide 
+			return RNVars.Default[GetDisplayName()]["$AccountWide"].useAccountWide
 		end,
-		setFunc = function(value) 
+		setFunc = function(value)
 			RNVars.Default[GetDisplayName()]["$AccountWide"].useAccountWide = value
 			ReloadUI()
 		end,
@@ -1115,7 +1115,7 @@ function RaidNotifier:CreateSettingsMenu()
 		tooltip = L.Settings_MawLorkhaj_Zhaj_Glyphs_Invert_TT,
 		getFunc = function() return savedVars.mawLorkhaj.zhaj_glyphs_invert end,
 		setFunc = function(value)   savedVars.mawLorkhaj.zhaj_glyphs_invert = value; self:InvertGlyphs() end,
-		disabled = function() return not savedVars.mawLorkhaj.zhaj_glyphs end, 
+		disabled = function() return not savedVars.mawLorkhaj.zhaj_glyphs end,
 		noAlert = true,
 	}, "mawLorkhaj", "zhaj_glyphs_invert")
 	MakeControlEntry({
@@ -1460,19 +1460,19 @@ function RaidNotifier:CreateSettingsMenu()
 		type = "checkbox",
 		name = L.Settings_Cloudrest_Malicious_Strike,
 		tooltip = L.Settings_Cloudrest_Malicious_Strike_TT,
-	}, "cloudrest", "malicious_strike")		
+	}, "cloudrest", "malicious_strike")
 	MakeControlEntry({
 		type = "dropdown",
 		name = L.Settings_Cloudrest_Heavy_Attack,
 		tooltip = L.Settings_Cloudrest_Heavy_Attack_TT,
 		choices = choices.cloudrest.heavy_attack,
-	}, "cloudrest", "heavy_attack")		
+	}, "cloudrest", "heavy_attack")
 	MakeControlEntry({
 		type = "dropdown",
 		name = L.Settings_Cloudrest_Baneful_Barb,
 		tooltip = L.Settings_Cloudrest_Baneful_Barb_TT,
 		choices = choices.cloudrest.baneful_barb,
-	}, "cloudrest", "baneful_barb")		
+	}, "cloudrest", "baneful_barb")
 	MakeControlEntry({
 		type = "checkbox",
 		name = L.Settings_Cloudrest_Break_Amulet,
@@ -1546,13 +1546,13 @@ function RaidNotifier:CreateSettingsMenu()
 		type = "checkbox",
 		name = L.Settings_Sunspire_Thrash,
 		tooltip = L.Settings_Sunspire_Thrash_TT,
-	}, "sunspire", "thrash")	
+	}, "sunspire", "thrash")
 	MakeControlEntry({
 		type = "dropdown",
 		name = L.Settings_Sunspire_Mark_For_Death,
 		tooltip = L.Settings_Sunspire_Mark_For_Death_TT,
 		choices = choices.sunspire.mark_for_death,
-	}, "sunspire", "mark_for_death")	
+	}, "sunspire", "mark_for_death")
 	MakeControlEntry({
 		type = "checkbox",
 		name = L.Settings_Sunspire_Time_Breach,
@@ -1562,7 +1562,7 @@ function RaidNotifier:CreateSettingsMenu()
 		type = "checkbox",
 		name = L.Settings_Sunspire_Shock_Bolt,
 		tooltip = L.Settings_Sunspire_Shock_Bolt_TT,
-	}, "sunspire", "shock_bolt")	
+	}, "sunspire", "shock_bolt")
 	MakeControlEntry({
 		type = "checkbox",
 		name = L.Settings_Sunspire_Apocalypse,
@@ -1619,7 +1619,7 @@ function RaidNotifier:CreateSettingsMenu()
 		--tooltip = RAIDNOTIFIER_SETTINGS_DEBUG_TRACKER_ENABLED_TT, -- dont need tooltip for this
 		getFunc = function() return savedVars.dbg.tracker end,
 		setFunc = function(value)
-				savedVars.dbg.tracker = value 
+				savedVars.dbg.tracker = value
 				self:ToggleDebugTracker(savedVars.dbg.tracker)
 			end,
 	})
@@ -1650,7 +1650,7 @@ function RaidNotifier:CreateSettingsMenu()
 
 	--function RaidNotifier:GetSoundValue(category, key)
 	--	local setting = self:GetSetting(savedVars, category, key)
-	--	return setting.sound 
+	--	return setting.sound
 	--end
 	--function RaidNotifier:SetSoundValue(category, key, value)
 	--	local setting = self:GetSetting(savedVars, category, key)
@@ -1660,13 +1660,13 @@ function RaidNotifier:CreateSettingsMenu()
 
 	local function InitializeCustomDialog()
 		local customControl = RaidNotifier_ConfigDialog
-		
+
 		local function SetupDialog(dialog, data)
 			customControl.selectSound = customControl:GetNamedChild("SelectSound")
 			customControl.selectedSoundID = self:GetSoundValue(data.category, data.key)
 			customControl.selectSound.dropdown:SetSelectedItemText(self:GetSoundName(customControl.selectedSoundID))
 		end
-	
+
 		local function OnDialogConfirm(dialog)
 			self:SetSoundValue(dialog.data.category, dialog.data.key, dialog.selectedSoundID)
 		end
@@ -1696,12 +1696,12 @@ function RaidNotifier:CreateSettingsMenu()
 				}
 			}
 		})
-		
+
 		local function OnSoundSelected(comboBox, entryText, entry)
 			customControl.selectedSoundID = entry.id
 			PlaySound(entry.id)
 		end
-		
+
 		local function PopulateSoundDropdown(comboBox)
 
 			comboBox:SetSortsItems(false)
@@ -1736,12 +1736,12 @@ function RaidNotifier:CreateSettingsMenu()
 				if (control and not control.data.noAlert) then
 					control.soundBtn = WINDOW_MANAGER:CreateControlFromVirtual(nil, control, "RaidNotifier_ConfigButton")
 					control.soundBtn:SetAnchor(RIGHT, control.combobox or control[control.data.type], LEFT, -1, 0)
-					control.soundBtn:SetHandler("OnClicked", function() 
+					control.soundBtn:SetHandler("OnClicked", function()
 							ZO_Dialogs_ShowDialog("RAID_NOTIFIER_CONFIG_DIALOG", control.data)
 						end)
 					control.soundBtn.data = {tooltipText=function() return GetConfigButtonTooltipText(control) end}
 					control.soundBtn:SetHidden(false)
-					
+
 					-- re-anchor the warning control
 					if control.warning then
 						control.warning:ClearAnchors()
@@ -1750,7 +1750,7 @@ function RaidNotifier:CreateSettingsMenu()
 				end
 			end
 		end
-		
+
 	end
 	CALLBACK_MANAGER:RegisterCallback("LAM-PanelControlsCreated", OnPanelCreation)
 
@@ -1762,7 +1762,7 @@ function RaidNotifier:TryUpgradeSettings()
 	local savedVars = self.Vars
 
 	local version, lastVersion = self.Version, savedVars.addonVersion or "0"
-	if lastVersion < "2.2.1" then 
+	if lastVersion < "2.2.1" then
 		-- change all alert sounds with CHAMPION_POINT_GAINED to DEFAULT_SOUND
 		for key, sound in pairs(savedVars.sounds) do
 			if sound == SOUNDS.CHAMPION_POINTS_COMMITTED then
@@ -1777,7 +1777,7 @@ function RaidNotifier:TryUpgradeSettings()
 		savedVars.countdown.timerScale = 100
 		savedVars.countdown.textScale = 100
 	end
-	
+
 	if lastVersion > "0" and lastVersion < "2.3.6" then
 		-- set taking_aim_duration to "Custom" if previous duration differs from the default
 		if savedVars.hallsFab.taking_aim_duration ~= defaults.hallsFab.taking_aim_duration then

@@ -38,7 +38,7 @@ end
 -- Locale
 local L
 
-RaidNotifier.ActionResults = 
+RaidNotifier.ActionResults =
 {
 	ACTION_RESULT_DAMAGE,
 	ACTION_RESULT_BEGIN,
@@ -46,7 +46,7 @@ RaidNotifier.ActionResults =
 	ACTION_RESULT_EFFECT_GAINED,
 	ACTION_RESULT_EFFECT_GAINED_DURATION,
 	ACTION_RESULT_EFFECT_FADED,
-	ACTION_RESULT_INTERRUPT, 
+	ACTION_RESULT_INTERRUPT,
 	ACTION_RESULT_DIED,
 	--ACTION_RESULT_DIED_XP, -- only interested in spawns/minions, which don't give exp??
 }
@@ -68,7 +68,7 @@ do ---------------------------------
 	end
 
 	local DEFAULT_SOUND = "Default_Sound"
-	local Sounds = 
+	local Sounds =
 	{
 		{name = "-Default-", 				 id = DEFAULT_SOUND},
 		{name = "-None-", 					 id = SOUNDS.NO_SOUND},
@@ -96,7 +96,7 @@ do ---------------------------------
 		{name = "Synergy Ready", 			 id = SOUNDS.ABILITY_SYNERGY_READY},
 		{name = "TelVar Multiplier Max",	 id = SOUNDS.TELVAR_MULTIPLIERMAX},
 	}
-	
+
 	function RaidNotifier:GetSounds()
 		return Sounds
 	end
@@ -132,7 +132,7 @@ do ---------------------------------
 
 		local duration = 3000
 		local soundId = self:GetSoundValue(category, setting)
-		if soundId == DEFAULT_SOUND then -- 
+		if soundId == DEFAULT_SOUND then --
 			soundId = self.Vars.general.default_sound
 		end
 
@@ -141,7 +141,7 @@ do ---------------------------------
 			return
 		end
 
-		if (interval) then 
+		if (interval) then
 			local currentTime = GetTimeStamp()
 			if (interval > GetDiffBetweenTimeStamps(currentTime, self:GetLastNotify(category, setting))) then
 				return
@@ -163,7 +163,7 @@ do ---------------------------------
 			if soundId ~= nil then PlaySound(soundId) end
 		end
 	end
-	
+
 	-- called when messageParams are applied to the line
 	local orgTextScale, orgCountdownScale, orgCountdownColor
 	local function SetupCallback(line, messageParams, doReset)
@@ -221,30 +221,30 @@ do ---------------------------------
 			p("Invalid text for '%s -> %s'", category, setting)
 			return
 		end
-		if (interval) then 
+		if (interval) then
 			local currentTime = GetTimeStamp()
 			if (interval > GetDiffBetweenTimeStamps(currentTime, self:GetLastNotify(category, setting))) then
 				return
 			end
 			self:SetLastNotify(category, setting, currentTime)
 		end
-		
+
 		important = important and important or important == nil -- default countdown
-		
+
 		local countdownId = 0
 		if not self:IsCountdownInProgress() and self.Vars.general.use_center_screen_announce > 0 or important then
 			countdownId = LCSA:CreateCountdown(timer, soundId, nil, text, nil, SetupCallback, CountdownCallback)
 		else
 			local pool = RaidNotifier.NotificationsPool.GetInstance()
 			countdownId = pool:Add(text, timer, true)
-			if soundId ~= nil then PlaySound(soundId) end		
+			if soundId ~= nil then PlaySound(soundId) end
 		end
 		if countdownId > 0 then
 			countdownInProgress = true
 		end
 		return countdownId
 	end
-	
+
 	function RaidNotifier:StopCountdown(countdownIndex)
 		LCSA:EndCountdown(countdownIndex)
 --		if self.Vars.general.use_center_screen_announce == 0 and not important then
@@ -253,7 +253,7 @@ do ---------------------------------
 --		end
 		countdownInProgress = false
 	end
-	
+
 end
 
 
@@ -273,7 +273,7 @@ do ----------------------
 	function RaidNotifier.OnUltimateReceived(unitTag, ultimateCurrent, ultimateCost) --, ultimateGroupId, isSelf)
 		local self     = RaidNotifier
 		local userName = GetUnitDisplayName(unitTag)
-		ultimates[userName] = 
+		ultimates[userName] =
 		{
 			userName = userName,
 			name     = GetUnitName(unitTag),
@@ -301,7 +301,7 @@ do ----------------------
 
 	local function ToggleLibGroupSocket(enabled)
 		local settings = RaidNotifier.Vars.ultimate
-		if settings.enabled then 
+		if settings.enabled then
 			local button = ZO_GroupMenu_Keyboard_LibGroupSocketToggle
 			if not button then -- wait for button
 				zo_callLater(function() ToggleLibGroupSocket(enabled) end, 1000)
@@ -316,9 +316,9 @@ do ----------------------
 	function RaidNotifier:RegisterForUltimateChanges()
 		local settings = self.Vars.ultimate
 		if not settings.enabled then return end
-		
+
 		if not ultimateHandler then return end
-		
+
 		if listening then return end
 		listening = true
 		dbg("RegisterForUltimateChanges")
@@ -326,7 +326,7 @@ do ----------------------
 		self:SetElementHidden("ultimate", "ulti_window", settings.hidden)
 
 		ultimates = {}
-		if ultimateHandler.SetUltimateGroupId then 
+		if ultimateHandler.SetUltimateGroupId then
 			ultimateHandler:SetUltimateGroupId(ultimateGroupId)
 		end
 		ultimateHandler:RegisterForUltimateChanges(self.OnUltimateReceived)
@@ -356,7 +356,7 @@ do ----------------------
 			local newMembers = {}
 			for i=1, groupSize do
 				local userName = GetUnitDisplayName("group"..i)
-				if userName and userName ~= "" then 
+				if userName and userName ~= "" then
 					newMembers[userName] = IsUnitOnline("group"..i)
 				end
 			end
@@ -385,7 +385,7 @@ do ----------------------
 
 	function RaidNotifier:UnregisterForUltimateChanges()
 		if not ultimateHandler then return end
-	
+
 		if not listening then return end
 		listening = false
 		dbg("UnregisterForUltimateChanges")
@@ -416,7 +416,7 @@ do ----------------------
 		self:UpdateUltimates()
 	end
 
-	SLASH_COMMANDS["/rnulti"] = function(str) 
+	SLASH_COMMANDS["/rnulti"] = function(str)
 		local args = {zo_strsplit(" ", str)}
 
 		local self     = RaidNotifier
@@ -435,7 +435,7 @@ do ----------------------
 			settings.enabled = true
 			settings.hidden = false
 			self:RegisterForUltimateChanges()
-			self:UpdateUltimates()			
+			self:UpdateUltimates()
 		elseif (args[1] == "disable" or args[1] == "off" or args[1] == "0") then
 			p("Disable Ultimate Exchange")
 			settings.enabled = false
@@ -446,7 +446,7 @@ do ----------------------
 				ultimateHandler:Refresh()
 			end
 		elseif (args[1] == "debug") then
-			if ultimateHandler then 
+			if ultimateHandler then
 				ultimateHandler:SetDebug(tonumber(args[2]))
 			end
 		elseif (args[1] == "clear") then
@@ -459,7 +459,7 @@ do ----------------------
 					settings.override_cost = tonumber(args[2])
 				elseif (args[2] == "auto") then -- maybe use GetSlotBoundId to grab slotted ability instead?
 					settings.override_cost = GetSlotAbilityCost(ACTION_BAR_ULTIMATE_SLOT_INDEX + 1)
-				else 
+				else
 					p("Trying to set override cost to unsupported value (%s)", args[2])
 					return
 				end
@@ -564,9 +564,9 @@ do ----------------------
 			self:AddAnnouncement(GetString(RAIDNOTIFIER_ALERTS_GENERAL_NO_BUFFFOOD), "general", "buffFood_reminder", settings.buffFood_reminder_interval)
 		end
 	end
-	
+
 	-- These should remain the same throughout updates
-	local RaidZoneIds = 
+	local RaidZoneIds =
 	{
 		[RAID_HEL_RA_CITADEL]        = 636,
 		[RAID_AETHERIAN_ARCHIVE]     = 638,
@@ -626,7 +626,7 @@ do ----------------------
 		self.raidDifficulty = GetCurrentZoneDungeonDifficulty()
 		if (self.raidId > 0) then
 			dbg("Register for %s (%s)", GetRaidZoneName(self.raidId), GetString("SI_DUNGEONDIFFICULTY", self.raidDifficulty))
-			
+
 			local trial = self.Trial[self.raidId]
 			if (trial) then
 				trial.Initialize()
@@ -634,7 +634,7 @@ do ----------------------
 				local bossesChangedCallback = trial.OnBossesChanged
 				local effectChangedCallback = trial.OnEffectChanged
 				local combatStateChangedCallback = trial.OnCombatStateChanged
-			
+
 				local abilityList = {}
 				local function RegisterForAbility(abId)
 					if not abilityList[abId] then
@@ -645,12 +645,12 @@ do ----------------------
 
 				-- The main juicy events we want, registered seperately for better performance
 				-- TODO: Remove (some of) this debugging when releasing it
-				-- TODO: Also add filter for action result but will require re-organizing BuffsDebuffs.lua 
+				-- TODO: Also add filter for action result but will require re-organizing BuffsDebuffs.lua
 				dbg("----------------------------------------------")
 				dbg(" Gathering Abilities for Raid")
 				local raidData = self.BuffsDebuffs[self.raidId]
 				for k,v in pairs(raidData) do
-					if type(v) == "number" then 
+					if type(v) == "number" then
 						if v > 10000 then
 							dbg("Found ability #%d (%s)", v, k)
 							RegisterForAbility(v)
@@ -685,7 +685,7 @@ do ----------------------
 				end
 				if (bossesChangedCallback) then
 					EVENT_MANAGER:RegisterForEvent(self.Name, EVENT_BOSSES_CHANGED, bossesChangedCallback)
-				end	
+				end
 
 				-- In case of initializing while already at a boss
 				if (bossesChangedCallback) then
@@ -702,14 +702,14 @@ do ----------------------
 					end
 					if (settings.no_assistants and GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT) > 0) then
 						UseCollectible(GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT))
-					end					
+					end
 				else
 					if (combatStateChangedCallback) then
-						zo_callLater(function() 
-							if (not IsUnitInCombat("player")) then 
+						zo_callLater(function()
+							if (not IsUnitInCombat("player")) then
 								dbg("not InCombat")
 								combatStateChangedCallback(inCombat)
-							end 
+							end
 						end, 3000);
 					end
 				end
@@ -719,7 +719,7 @@ do ----------------------
 
 			--self:AddFragment()
 			listening = true
-	
+
 			-- Ultimate exchanging
 			self:RegisterForUltimateChanges()
 
@@ -748,7 +748,7 @@ do ----------------------
 
 		-- Ultimate exchanging
 		self:UnregisterForUltimateChanges()
-		
+
 		-- Food buffs
 		EVENT_MANAGER:UnregisterForUpdate(self.Name .. "Food")
 
@@ -777,7 +777,7 @@ do ----------------------
 		end
 		self.dbg = dbg
 
-		if ENABLE_DEBUG_LOG then 
+		if ENABLE_DEBUG_LOG then
 			if not RN_DEBUG_LOG then
 				RN_DEBUG_LOG = {}
 			end
@@ -793,9 +793,9 @@ do ----------------------
 		end
 
 		self:CreateSettingsMenu()
-		
+
 		L = self:GetLocale()
-		
+
 		-- Init debug
 		self:ToggleDebugTracker(self.Vars.dbg.tracker or self.Vars.dbg.units)
 
@@ -807,12 +807,12 @@ do ----------------------
 		self.AnnouncementUIManager:Initialize(RaidNotifierUICenterAnnounce)
 		RaidNotifier.NotificationsPool.GetInstance():SetScale(self.Vars.general.notifications_scale / 100);
 		RaidNotifier.NotificationsPool.GetInstance():SetPrecise(self.Vars.countdown.timerPrecise)
-		
+
 		-- Bindings
 		ZO_CreateStringId("SI_BINDING_NAME_RAIDNOTIFIER_TOGGLE_ULTI", L.Binding_ToggleUltimateExchange)
 
 		-- Always add fragment now
-		self:AddFragment() 
+		self:AddFragment()
 
 		-- These aren't needed anymore since we now start & stop Raid Notifier solely based on being in the raid zone
 	    --EVENT_MANAGER:RegisterForEvent(self.Name, EVENT_RAID_TRIAL_STARTED,  function(...) self:RegisterEvents() end)
@@ -856,11 +856,11 @@ end
 do
 	local bossCount, bossAlive, bossFull
 	function RaidNotifier:GetNumBosses(fresh)
-		if (not bossCount or fresh) then 
+		if (not bossCount or fresh) then
 			bossCount = 0
 			bossAlive = 0
-			bossFull = 0 
-			
+			bossFull = 0
+
 			local health, maxHealth
 			for i = 1, MAX_BOSSES do
 				if DoesUnitExist("boss"..i) then
@@ -883,7 +883,7 @@ do ---------------------------
 
 	local LUNIT = LibUnits2
 	local Util  = RaidNotifier.Util
-	
+
 	function RaidNotifier.UnitIdToString(id)
 		local name = RaidNotifier.Vars.general.useDisplayName and LUNIT.GetDisplayNameForUnitId(id) or LUNIT.GetNameForUnitId(id)
 		if name == "" then
@@ -891,7 +891,7 @@ do ---------------------------
 		end
 		return name
 	end
-	
+
 	function RaidNotifier.UnitToTag(id)
 		return LUNIT.GetUnitTagForUnitId(id)
 	end
@@ -922,7 +922,7 @@ do ---------------------------
 		[RAID_SUNSPIRE]	             = RaidNotifier.SS,
 		[RAID_KYNES_AEGIS]           = RaidNotifier.KA,
 	}
-	
+
 	-------------------
 	---- Debugging ----
 	-------------------
@@ -934,19 +934,19 @@ do ---------------------------
 
 	local trackedUnits = {}
 	local trackedAbilities = {}
-	
+
 	local function OnCombatDebugEvent(_, result, isError, aName, aGraphic, aActionSlotType, sName, sType, tName, tType, hitValue, pType, dType, log, sUnitId, tUnitId, abilityId)
 
 		local self   = RaidNotifier
-		
+
 --		if abilityId < 80000 then
---			return 
+--			return
 		if sType == COMBAT_UNIT_TYPE_PLAYER then
 			return
 		elseif self.blacklist and self.blacklist[abilityId] then
-			return 
+			return
 		end
-		
+
 		if self.Vars.dbg.units then
 			local function CheckUnit(id, name, type)
 				if id > 0 and not trackedUnits[id] then
@@ -962,7 +962,7 @@ do ---------------------------
 			end
 			CheckUnit(tUnitId, tName, tType)
 		end
-	
+
 		--self.Vars.dbg.blacklist = self.Vars.dbg.blacklist or {}
 		--self.Vars.dbg.blacklist[abilityId] = true
 
@@ -989,7 +989,7 @@ do ---------------------------
 					local ability = (aName ~= "" and aName ~= nil) and aName or GetAbilityName(abilityId)
 
 					debugList[result][abilityId] = self.Vars.dbg.spamControl
-					dlog(debugMsg, result, ability, abilityId, source, target, hitValue)	
+					dlog(debugMsg, result, ability, abilityId, source, target, hitValue)
 				end
 			end
 		end
@@ -998,7 +998,7 @@ do ---------------------------
 	local debugEventName = RaidNotifier.Name .. "_CombatEventDebug"
 	function RaidNotifier:ToggleDebugTracker(enabled)
 		EVENT_MANAGER:UnregisterForEvent(debugEventName, EVENT_COMBAT_EVENT)
-		if enabled then 
+		if enabled then
 			EVENT_MANAGER:RegisterForEvent(debugEventName, EVENT_COMBAT_EVENT, OnCombatDebugEvent)
 		end
 	end
@@ -1028,7 +1028,7 @@ do ---------------------------
 	end
 
 	-- Fast debug toggle
-	SLASH_COMMANDS["/rndebug"] = function(str) 
+	SLASH_COMMANDS["/rndebug"] = function(str)
 		local args = {zo_strsplit(" ", str)}
 
 		local self     = RaidNotifier
@@ -1045,7 +1045,7 @@ do ---------------------------
 		elseif (args[1] == "spam") then
 			settings.spamControl = Util.GetArgValue(args[2], settings.spamControl)
 			p("%s Spam Control", settings.spamControl and "Enabled" or "Disabled")
-		elseif (args[1] == "arrow") then			
+		elseif (args[1] == "arrow") then
 			p("Arrow test")
 			local masterList = GROUP_LIST_MANAGER:GetMasterList()
 			if (#masterList == 0) then
@@ -1060,7 +1060,7 @@ do ---------------------------
 			p("%s My Enemy Only", settings.myEnemyOnly and "Enabled" or "Disabled")
 		elseif (args[1] == "clear") then
 			local result = tonumber(args[2])
-			if result ~= nil then 
+			if result ~= nil then
 				p("Clearing debug list [%d]", result)
 				debugList[result] = {}
 			else
