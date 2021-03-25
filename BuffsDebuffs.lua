@@ -597,8 +597,6 @@ kynes_aegis.yandir_harpy_totem_spawn = 133511
 kynes_aegis.yandir_gargoyle_totem_spawn = 133514
 -- Chaurus Totem spawn at Yandir the Butcher boss
 kynes_aegis.yandir_chaurus_totem_spawn = 133516
--- Harpooner's Heavy Strike attack at Captain Vrol boss
-kynes_aegis.vrol_harpooner_heavy_strike = 140230
 -- Harpooner's Javelin attack at Captain Vrol boss
 kynes_aegis.vrol_harpooner_javelin = 140231
 

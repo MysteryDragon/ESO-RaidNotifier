@@ -574,8 +574,6 @@ L.Alerts_KynesAegis_Gargoyle_Totem                  = "|cf5f5dcGargoyle Totem|r 
 L.Alerts_KynesAegis_Chaurus_Totem                   = "|c39942eChaurus Totem|r spawned. Don't stack!"
 L.Alerts_KynesAegis_Harpooner_Javelin               = "|cff6600Javelin|r targeted at you! Interrupt or dodge!"
 L.Alerts_KynesAegis_Harpooner_Javelin_Other         = "|cff6600Javelin|r targeted at <<!aC:1>>! Interrupt!"
-L.Alerts_KynesAegis_Harpooner_Heavy_Strike          = "|cff6600Heavy Strike|r targeted at you! Interrupt or dodge!"
-L.Alerts_KynesAegis_Harpooner_Heavy_Strike_Other    = "|cff6600Heavy Strike|r targeted at <<!aC:1>>! Interrupt!"
 
 
 --------------------------------

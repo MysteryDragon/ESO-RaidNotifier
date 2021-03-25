@@ -48,16 +48,6 @@ function RaidNotifier.KA.OnCombatEvent(_, result, isError, aName, aGraphic, aAct
                 end
             end
         end
-        if (abilityId == buffsDebuffs.vrol_harpooner_heavy_strike) then
-            if (settings.vrol_harpooner_javelin >= 1) then
-                if (tType == COMBAT_UNIT_TYPE_PLAYER) then
-                    self:AddAnnouncement(GetString(RAIDNOTIFIER_ALERTS_KYNESAEGIS_HARPOONER_HEAVY_STRIKE), "kynesAegis", "vrol_harpooner_javelin")
-                elseif (tName ~= "" and settings.vrol_harpooner_javelin == 2) then
-                    -- We'll add 2 sec delay as harpooners may target several players in short time, but it's hard to keep them all in mind
-                    self:AddAnnouncement(zo_strformat(GetString(RAIDNOTIFIER_ALERTS_KYNESAEGIS_HARPOONER_HEAVY_STRIKE_OTHER), tName), "kynesAegis", "vrol_harpooner_javelin", 2)
-                end
-            end
-        end
     elseif (result == ACTION_RESULT_EFFECT_GAINED) then
         -- Bitter Knight's Sanguine Prison
         if (abilityId == buffsDebuffs.bitter_knight_sanguine_prison) then
