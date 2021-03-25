@@ -5,9 +5,10 @@ Version: 4 (Summerset)
 Total: 115 titles
 ]]--
 
-local libLoaded
-local LIB_NAME = "LibTitleLocale"
 local lib = {}
+
+lib.Name = "LibTitleLocale"
+lib.Version = "4"
 
 local LocaleTitles =
 {
@@ -754,13 +755,10 @@ local function Load()
 end
 
 local function OnAddonLoaded(_, addonName)
-    if not libLoaded then
-        -- TODO It's best to check addonName instead, but it requires to add manifest to this library
-        libLoaded = true
-        EVENT_MANAGER:UnregisterForEvent(LIB_NAME, EVENT_ADD_ON_LOADED)
-        if (lib.Unload) then lib.Unload() end
-        Load()
-    end
+    if addonName ~= lib.Name then return end
+    EVENT_MANAGER:UnregisterForEvent(lib.Name, EVENT_ADD_ON_LOADED)
+    if (lib.Unload) then lib.Unload() end
+    Load()
 end
 
-EVENT_MANAGER:RegisterForEvent(LIB_NAME, EVENT_ADD_ON_LOADED, OnAddonLoaded)
+EVENT_MANAGER:RegisterForEvent(lib.Name, EVENT_ADD_ON_LOADED, OnAddonLoaded)

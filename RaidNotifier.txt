@@ -5,14 +5,7 @@
 ## APIVersion: 100034
 ## SavedVariables: RNVars RN_DEBUG_LOG
 ## DependsOn: LibAddonMenu-2.0>=28 LibUnits2 LibCSA
-## OptionalDependsOn: LibGroupSocket
-
-libs/LibCustomTitles/LibTitleLocale.lua
-libs/LibCustomTitles/LibCustomTitles.lua
-libs/LibCustomTitles/Titles/Kyoma.lua
-libs/LibCustomTitles/Titles/Woeler.lua
-libs/LibCustomTitles/Titles/Valve.lua
-libs/LibCustomTitles/Titles/Memus.lua
+## OptionalDependsOn: LibGroupSocket LibTitleLocale LibCustomTitlesRN
 
 UltimateHandler.lua
 TrialAetherianArchive.lua

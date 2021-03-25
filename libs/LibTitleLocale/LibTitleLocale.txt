@@ -1,0 +1,8 @@
+﻿## Title: LibTitleLocale
+## APIVersion: 100034
+## Author: Kyoma
+## Version: 4
+## AddOnVersion: 4
+## IsLibrary: true
+
+LibTitleLocale.lua

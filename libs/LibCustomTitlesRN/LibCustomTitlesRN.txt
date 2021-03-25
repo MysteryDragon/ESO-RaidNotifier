@@ -1,0 +1,12 @@
+﻿## Title: LibCustomTitlesRN
+## APIVersion: 100034
+## Author: Kyoma
+## Version: 20
+## AddOnVersion: 20
+## IsLibrary: true
+
+LibCustomTitles.lua
+Titles/Kyoma.lua
+Titles/Woeler.lua
+Titles/Valve.lua
+Titles/Memus.lua
