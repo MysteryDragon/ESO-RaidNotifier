@@ -299,6 +299,7 @@ do ------------------
 			bitter_knight_sanguine_prison = false,
 			bloodknight_blood_fountain = false,
 			yandir_totem_spawn = 0, -- "Off"
+			vrol_harpooner_javelin = 0, -- "Off"
 		},
 		dbg = {
 			enable = false,
@@ -540,6 +541,7 @@ function RaidNotifier:CreateSettingsMenu()
 				L.Settings_General_Choices_OnlyChaurusTotem,
 				L.Settings_General_Choices_All,
 			},
+			vrol_harpooner_javelin = off_self_all,
 		},
 	}
 
@@ -1597,8 +1599,14 @@ function RaidNotifier:CreateSettingsMenu()
 		type = "dropdown",
 		name = L.Settings_KynesAegis_Totem,
 		tooltip = L.Settings_KynesAegis_Totem_TT,
-		choices = choices.kynesAegis.yandir_totem_spawn,
+        choices = choices.kynesAegis.yandir_totem_spawn,
 	}, "kynesAegis", "yandir_totem_spawn")
+	MakeControlEntry({
+		type = "dropdown",
+		name = L.Settings_KynesAegis_Harpooner_Javelin,
+		tooltip = L.Settings_KynesAegis_Harpooner_Javelin_TT,
+		choices = choices.kynesAegis.vrol_harpooner_javelin,
+	}, "kynesAegis", "vrol_harpooner_javelin")
 	subTable = nil --end submenu
 
 	MakeControlEntry({
