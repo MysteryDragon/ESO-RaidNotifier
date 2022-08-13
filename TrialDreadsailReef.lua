@@ -90,11 +90,11 @@ function RaidNotifier.DSR.OnCombatEvent(_, result, isError, aName, aGraphic, aAc
                 "dome_activation"
             )
         -- Reef Guardian's Heartburn buff on Reef Heart
-        elseif (abilityId == buffsDebuffs.reef_guardian_heartburn_buff and settings.reef_guardian_reef_heart_result) then
+        elseif (abilityId == buffsDebuffs.reef_guardian_heartburn_buff and (settings.reef_guardian_reef_heart or settings.reef_guardian_reef_heart_result)) then
             data.reefHeartCounter = data.reefHeartCounter + 1
             data.reefHearts[tUnitId] = data.reefHeartCounter
 
-            if (settings.reef_guardian_reef_heart_result) then
+            if (settings.reef_guardian_reef_heart) then
                 self:AddAnnouncement(
                     zo_strformat(GetString(RAIDNOTIFIER_ALERTS_DREADSAILREEF_REEFGUARDIAN_REEFHEART), data.reefHeartCounter),
                     "dreadsailReef",
