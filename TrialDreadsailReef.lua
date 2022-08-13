@@ -18,13 +18,11 @@ function RaidNotifier.DSR.Initialize()
 end
 
 function RaidNotifier.DSR.OnCombatStateChanged(inCombat)
-    if inCombat then
-        local bossCount, bossAlive, bossFull = RaidNotifier:GetNumBosses(true)
+    local bossCount, bossAlive, bossFull = RaidNotifier:GetNumBosses(true)
 
-        if bossCount == 0 or bossAlive == 0 or bossFull == bossCount then
-            data.reefHeartCounter = 0
-            data.reefHearts = {}
-        end
+    if bossCount == 0 or bossAlive == 0 or bossFull == bossCount then
+        data.reefHeartCounter = 0
+        data.reefHearts = {}
     end
 end
 
