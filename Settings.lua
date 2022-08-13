@@ -322,6 +322,7 @@ do ------------------
 			imminent_debuffs = false,
 			brothers_heavy_attack = 0, -- "Off"
 			reef_guardian_reef_heart = false,
+			reef_guardian_reef_heart_result = false,
 			taleria_rapid_deluge = 0, -- "Off"
 		},
 		dbg = {
@@ -1743,6 +1744,14 @@ function RaidNotifier:CreateSettingsMenu()
 		name = L.Settings_DreadsailReef_ReefGuardian_ReefHeart,
 		tooltip = L.Settings_DreadsailReef_ReefGuardian_ReefHeart_TT,
 	}, "dreadsailReef", "reef_guardian_reef_heart")
+	MakeControlEntry({
+		type = "checkbox",
+		name = L.Settings_DreadsailReef_ReefHeart_Result,
+		tooltip = L.Settings_DreadsailReef_ReefHeart_Result_TT,
+		disabled = function()
+			return savedVars.dreadsailReef.reef_guardian_reef_heart == false;
+		end,
+	}, "dreadsailReef", "reef_guardian_reef_heart_result")
 	MakeControlEntry({
 		type = "dropdown",
 		name = L.Settings_DreadsailReef_Rapid_Deluge,

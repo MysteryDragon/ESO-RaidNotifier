@@ -14,6 +14,7 @@ function RaidNotifier.DSR.Initialize()
 
     data = {}
     data.reefHeartCounter = 0
+    data.reefHearts = {}
 end
 
 function RaidNotifier.DSR.OnCombatStateChanged(inCombat)
@@ -22,6 +23,7 @@ function RaidNotifier.DSR.OnCombatStateChanged(inCombat)
 
         if bossCount == 0 or bossAlive == 0 or bossFull == bossCount then
             data.reefHeartCounter = 0
+            data.reefHearts = {}
         end
     end
 end
@@ -50,14 +52,6 @@ function RaidNotifier.DSR.OnCombatEvent(_, result, isError, aName, aGraphic, aAc
             elseif (settings.brothers_heavy_attack == 2 and tName ~= "") then
                 self:AddAnnouncement(zo_strformat(GetString(RAIDNOTIFIER_ALERTS_DREADSAILREEF_STINGING_SHEAR_OTHER), tName), "dreadsailReef", "brothers_heavy_attack")
             end
-        -- Reef Guardian's Heartburn cast on Reef Heart
-        elseif (abilityId == buffsDebuffs.reef_guardian_heartburn and settings.reef_guardian_reef_heart) then
-            data.reefHeartCounter = data.reefHeartCounter + 1
-            self:AddAnnouncement(
-                zo_strformat(GetString(RAIDNOTIFIER_ALERTS_DREADSAILREEF_REEFGUARDIAN_REEFHEART), data.reefHeartCounter),
-                "dreadsailReef",
-                "reef_guardian_reef_heart"
-            )
         end
     elseif (result == ACTION_RESULT_EFFECT_GAINED_DURATION) then
         -- Lylanar's Imminent Blister debuff
@@ -97,6 +91,42 @@ function RaidNotifier.DSR.OnCombatEvent(_, result, isError, aName, aGraphic, aAc
                 "dreadsailReef",
                 "dome_activation"
             )
+        -- Reef Guardian's Heartburn buff on Reef Heart
+        elseif (abilityId == buffsDebuffs.reef_guardian_heartburn_buff and (settings.reef_guardian_reef_heart or settings.reef_guardian_reef_heart_result)) then
+            data.reefHeartCounter = data.reefHeartCounter + 1
+            data.reefHearts[tUnitId] = data.reefHeartCounter
+
+            if (settings.reef_guardian_reef_heart) then
+                self:AddAnnouncement(
+                    zo_strformat(GetString(RAIDNOTIFIER_ALERTS_DREADSAILREEF_REEFGUARDIAN_REEFHEART), data.reefHeartCounter),
+                    "dreadsailReef",
+                    "reef_guardian_reef_heart"
+                )
+            end
+        -- Reef Heart was successfully destroyed
+        elseif (abilityId == buffsDebuffs.reef_guardian_heartburn_vulnerability and settings.reef_guardian_reef_heart_result) then
+            local alertMsg
+
+            if (tUnitId and data.reefHearts[tUnitId]) then
+                alertMsg = zo_strformat(GetString(RAIDNOTIFIER_ALERTS_DREADSAILREEF_REEFHEART_SUCCESS), data.reefHearts[tUnitId])
+            else
+                -- It shouldn't happen, but for now we'd like to handle it just in case
+                alertMsg = GetString(RAIDNOTIFIER_ALERTS_DREADSAILREEF_REEFHEART_SUCCESS_UNKNOWN)
+            end
+
+            self:AddAnnouncement(alertMsg, "dreadsailReef", "reef_guardian_reef_heart_result")
+        -- Reef Heart wasn't destroyed in time
+        elseif (abilityId == buffsDebuffs.reef_guardian_heartburn_empowerment and settings.reef_guardian_reef_heart_result) then
+            local alertMsg
+
+            if (tUnitId and data.reefHearts[tUnitId]) then
+                alertMsg = zo_strformat(GetString(RAIDNOTIFIER_ALERTS_DREADSAILREEF_REEFHEART_FAILURE), data.reefHearts[tUnitId])
+            else
+                -- It shouldn't happen, but for now we'd like to handle it just in case
+                alertMsg = GetString(RAIDNOTIFIER_ALERTS_DREADSAILREEF_REEFHEART_FAILURE_UNKNOWN)
+            end
+
+            self:AddAnnouncement(alertMsg, "dreadsailReef", "reef_guardian_reef_heart_result")
         end
     end
 end
