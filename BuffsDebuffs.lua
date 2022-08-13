@@ -674,8 +674,4 @@ dreadsail_reef.taleria_rapid_deluge = {
 	[174961] = true, -- Hardmode
 }
 
-dreadsail_reef.fire2 = 166210
-dreadsail_reef.ice2 = 166192
-dreadsail_reef.heart3 = 166036
-
 RaidNotifier.BuffsDebuffs[RAID_DREADSAIL_REEF] = dreadsail_reef

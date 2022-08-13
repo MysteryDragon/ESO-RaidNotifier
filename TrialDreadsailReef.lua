@@ -18,40 +18,11 @@ function RaidNotifier.DSR.Initialize()
 end
 
 function RaidNotifier.DSR.OnCombatStateChanged(inCombat)
-    d("boss1 position")
-    d(GetUnitRawWorldPosition("boss1"))
-    d(GetMapPlayerPosition("boss1"))
-    d(GetNormalizedWorldPosition("boss1"))
-    d("--------")
-
     local bossCount, bossAlive, bossFull = RaidNotifier:GetNumBosses(true)
 
     if bossCount == 0 or bossAlive == 0 or bossFull == bossCount then
         data.reefHeartCounter = 0
         data.reefHearts = {}
-    end
-end
-
-function RaidNotifier.DSR.OnEffectChanged(eventCode, changeType, eSlot, eName, uTag, beginTime, endTime, stackCount, iconName, buffType, eType, aType, statusEffectType, uName, uId, abilityId, uType)
-    local raidId = RaidNotifier.raidId
-    local self   = RaidNotifier
-
-    local buffsDebuffs, settings = self.BuffsDebuffs[raidId], self.Vars.dreadsailReef
-
-    if (abilityId == buffsDebuffs.destructive_ember and changeType == EFFECT_RESULT_GAINED) then
-        local targetPlayerName = self.UnitIdToString(uId)
-
-        -- self:AddAnnouncement(zo_strformat("(onEffectChanged) <<!aC:1>> got Fire dome!", targetPlayerName), "dreadsailReef", "brothers_heavy_attack")
-    end
-
-    if (abilityId == buffsDebuffs.piercing_hailstone and changeType == EFFECT_RESULT_GAINED) then
-        local targetPlayerName = self.UnitIdToString(uId)
-
-        -- self:AddAnnouncement(zo_strformat("(onEffectChanged) <<!aC:1>> got Ice dome!", targetPlayerName), "dreadsailReef", "brothers_heavy_attack")
-    end
-
-    if ((abilityId == buffsDebuffs.reef_guardian_heartburn or abilityId == buffsDebuffs.reef_guardian_heartburn_vulnerability or abilityId == buffsDebuffs.reef_guardian_heartburn_empowerment or abilityId == buffsDebuffs.reef_guardian_heartburn_buff or abilityId == 166036) and settings.reef_guardian_reef_heart) then
-        d("[onEffectChanged] eName: " .. tostring(eName) .. ", changeType: " .. tostring(changeType) .. ", uTag: " .. tostring(uTag) .. ", uName: " .. tostring(uName) .. ", uId: " .. tostring(uId) .. ", uType: " .. tostring(uType) .. ", eType: " .. tostring(eType) .. ", statusEffectType: " .. tostring(statusEffectType) .. ", buffType: " .. tostring(buffType) .. ", aType: " .. tostring(aType) .. ", abilityId: " .. tostring(abilityId))
     end
 end
 
@@ -62,18 +33,6 @@ function RaidNotifier.DSR.OnCombatEvent(_, result, isError, aName, aGraphic, aAc
 
     if (tName == nil or tName == "") then
         tName = self.UnitIdToString(tUnitId)
-    end
-
-    if (abilityId == 166210) then
-        -- self:AddAnnouncement(zo_strformat("(onCombatEvent) <<!aC:1>> have Fire dome [" .. tostring(result) .. "]!", tName), "dreadsailReef", "brothers_heavy_attack")
-    end
-
-    if (abilityId == 166192) then
-        -- self:AddAnnouncement(zo_strformat("(onCombatEvent) <<!aC:1>> have Ice dome [" .. tostring(result) .. "]!", tName), "dreadsailReef", "brothers_heavy_attack")
-    end
-
-    if ((abilityId == buffsDebuffs.reef_guardian_heartburn or abilityId == buffsDebuffs.reef_guardian_heartburn_vulnerability or abilityId == buffsDebuffs.reef_guardian_heartburn_empowerment or abilityId == buffsDebuffs.reef_guardian_heartburn_buff or abilityId == 166036) and settings.reef_guardian_reef_heart) then
-        d("result: " .. tostring(result) .. ", tUnitId: " .. tostring(tUnitId) .. ", abilityId: " .. tostring(abilityId))
     end
 
     if (result == ACTION_RESULT_BEGIN) then
