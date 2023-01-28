@@ -644,7 +644,6 @@ do ----------------------
 		-- Latter matters here too since NotificationsPool countdown doesn't care about RaidNotifier:IsCountdownInProgress() state
 		-- If it'd be needed to keep notifications at the screen then you should call RaidNotifier:StopCountdown(0) here at least
 		RaidNotifier:StopCountdown()
-		self.control:SetMovable(false)
 		RaidNotifier:ResetElement(self.control)
 	end
 
@@ -652,7 +651,6 @@ do ----------------------
 		if not self.control then return end
 
 		RaidNotifier:StopCountdown()
-		self.control:SetMovable(true)
 		RaidNotifier:RegisterElement(self.control)
 	end
 
@@ -662,5 +660,22 @@ do ----------------------
 		if RaidNotifier.Vars.general.use_center_screen_announce == 0 then
 			self:SetupCustomState()
 		end
+	end
+end
+-- ------------
+-- -- UNLOCK UI
+do ------------
+	function RaidNotifier:UnlockUI()
+		if RaidNotifier.Vars.general.use_center_screen_announce == 0 then
+			RaidNotifier:StopCountdown()
+			RaidNotifier.AnnouncementUIManager.control:SetMovable(true)
+		end
+
+		RaidNotifier:UpdateTwinAspect("tolunar")
+	end
+
+	function RaidNotifier:LockUI()
+		RaidNotifier.AnnouncementUIManager.control:SetMovable(false)
+		RaidNotifier:UpdateTwinAspect("none")
 	end
 end

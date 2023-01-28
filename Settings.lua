@@ -155,6 +155,7 @@ do ------------------
 			last_pet = 0,
 			status_display  = {100, 400, CENTER},
 			unlock_status_icon = false,
+			unlock_ui = false,
 			default_sound   = SOUNDS.CHAMPION_POINTS_COMMITTED,
 			announcement_position = {0, -120, CENTER},
 		},
@@ -442,6 +443,7 @@ function RaidNotifier:CreateSettingsMenu()
 
 	local defaults = self:GetDefaults()
 	local savedVars = self.Vars
+	local localVars = {} -- temporary values that shouldn't be saved
 
 	local L = self:GetLocale()
 
@@ -772,6 +774,24 @@ function RaidNotifier:CreateSettingsMenu()
 		tooltip = L.Settings_General_Unlock_Status_Icon_TT,
 		noAlert = true,
 	}, "general", "unlock_status_icon")
+	MakeControlEntry({
+		type = "checkbox",
+		name = L.Settings_General_Unlock_UI,
+		getFunc = function()
+			return localVars.unlock_ui ~= nil and localVars.unlock_ui or defaults.general.unlock_ui
+		end,
+		setFunc = function(value)
+			localVars.unlock_ui = value
+
+			if value then
+				RaidNotifier:UnlockUI()
+			else
+				RaidNotifier:LockUI()
+			end
+		end,
+		tooltip = L.Settings_General_Unlock_UI_TT,
+		noAlert = true,
+	}, "general", "unlock_ui")
 
 	local c, cV = Util.UnboxTable(self:GetSounds(), {"name", "id"})
 	table.remove(c, 1)   table.remove(cV, 1) -- remove "-Default-"

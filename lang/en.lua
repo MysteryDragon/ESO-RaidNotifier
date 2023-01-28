@@ -24,6 +24,8 @@ L.Settings_General_UseDisplayName                   = "Use Dislay Name"
 L.Settings_General_UseDisplayName_TT                = "Use a player's display name in the notifications instead of his character name."
 L.Settings_General_Unlock_Status_Icon               = "Unlock Status Icon"
 L.Settings_General_Unlock_Status_Icon_TT            = "When enabled it will show status icon on the screen that can be moved."
+L.Settings_General_Unlock_UI                        = "Unlock UI"
+L.Settings_General_Unlock_UI_TT                     = "Enable this mode to move status icon or notification area for \"custom\" mode."
 L.Settings_General_Default_Sound                    = "Default Sound"
 L.Settings_General_Default_Sound_TT                 = "The default sound to use for a notification."
 -- Choices
