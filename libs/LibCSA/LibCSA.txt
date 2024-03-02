@@ -1,0 +1,7 @@
+## Title: LibCSA
+## APIVersion: 101037
+## Author: Kyoma
+## AddOnVersion: 21
+## IsLibrary: true
+
+LibCSA.lua
