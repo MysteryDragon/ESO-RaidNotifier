@@ -637,6 +637,7 @@ do ----------------------
 			if (trial) then
 				trial.Initialize()
 				local combatEventCallback = trial.OnCombatEvent
+				local updateCallback = trial.OnUpdate
 				local bossesChangedCallback = trial.OnBossesChanged
 				local effectChangedCallback = trial.OnEffectChanged
 				local effectChangedForGroupCallback = trial.OnEffectChangedForGroup
@@ -707,6 +708,10 @@ do ----------------------
 
 				if (bossesChangedCallback) then
 					EVENT_MANAGER:RegisterForEvent(self.Name, EVENT_BOSSES_CHANGED, bossesChangedCallback)
+				end
+
+				if (updateCallback) then
+					EVENT_MANAGER:RegisterForUpdate(self.Name.."_Update", 100, updateCallback)
 				end
 
 				-- In case of initializing while already at a boss

@@ -25,22 +25,72 @@ function RaidNotifier.RG.Initialize()
     dbg = RaidNotifier.dbg
 
     data = {}
+    data.bossName = nil
+    data.savageBlitzCountdownIsActive = false
+    data.lastSavageBlitzTime = 0
     data.bahseiPortalCounter = 0
 end
 
-function RaidNotifier.RG.OnCombatStateChanged(inCombat)
-    if (inCombat and DoesUnitExist("boss1")) then
-        local currentHealth, maxHealth = GetUnitPower("boss1", POWERTYPE_HEALTH)
+function RaidNotifier.RG.Shutdown()
+    -- In case of zoning out during the battle "OnCombatStateChanged" handler may be unregistered before it'll be called
+    -- outside the combat; so we have to manually unregister handler for interval check here
+    EVENT_MANAGER:UnregisterForUpdate(RaidNotifier.Name .. "_IntervalCheck")
+end
 
-        if currentHealth ~= nil and maxHealth ~= nil and currentHealth > 0 and maxHealth > 0 then
-            local healthPercent = currentHealth / maxHealth
+--function RaidNotifier.RG.OnBossesChanged()
+    --data.bossName = string.lower(GetUnitName("boss1"))
+--end
 
-            if healthPercent <= 99 then
-                return
-            end
+local function OnIntervalCheck()
+    local self = RaidNotifier
+    local settings = self.Vars.rockgrove
+
+    local currentTime = GetGameTimeMilliseconds()
+
+    if (settings.oaxiltso_savage_blitz and data.bossName == "oaxiltso") then -- and settings.oaxiltso_savage_blitz_cd > 0
+        local timeSinceLastCharge = currentTime - data.lastSavageBlitzTime
+        local timeUntilNextCharge = 36000 - timeSinceLastCharge
+
+        if (timeUntilNextCharge >= 2000 and timeUntilNextCharge <= 5000 and not data.savageBlitzCountdownIsActive) then
+            self:StartCountdown(
+                timeUntilNextCharge,
+                GetString(RAIDNOTIFIER_ALERTS_ROCKGROVE_SAVAGE_BLITZ_COUNTDOWN),
+                "rockgrove",
+                "oaxiltso_savage_blitz",
+                false
+            )
+
+            data.savageBlitzCountdownIsActive = true
         end
     end
+end
 
+function RaidNotifier.RG.OnCombatStateChanged(inCombat)
+    if (inCombat) then
+        -- At the start of the fight we want to clear all previous fight data collected
+        EVENT_MANAGER:RegisterForUpdate(RaidNotifier.Name .. "_IntervalCheck", 200, OnIntervalCheck)
+        dbg("start interval check")
+
+        if (DoesUnitExist("boss1")) then
+            data.bossName = string.lower(GetUnitName("boss1"))
+
+            local currentHealth, maxHealth = GetUnitPower("boss1", POWERTYPE_HEALTH)
+
+            if currentHealth ~= nil and maxHealth ~= nil and currentHealth > 0 and maxHealth > 0 then
+                local healthPercent = currentHealth / maxHealth
+
+                if healthPercent <= 99 then
+                    return
+                end
+            end
+        end
+    else
+        EVENT_MANAGER:UnregisterForUpdate(RaidNotifier.Name .. "_IntervalCheck")
+        dbg("stopped interval check")
+    end
+
+    data.savageBlitzCountdownIsActive = false
+    data.lastSavageBlitzTime = 0
     data.bahseiPortalCounter = 0
 end
 
@@ -146,6 +196,9 @@ function RaidNotifier.RG.OnCombatEvent(_, result, isError, aName, aGraphic, aAct
             end
         -- Oaxiltso's Savage Blitz
         elseif (buffsDebuffs.oaxiltso_savage_blitz[abilityId]) then
+            data.savageBlitzCountdownIsActive = false
+            data.lastSavageBlitzTime = GetGameTimeMilliseconds()
+
             if (settings.oaxiltso_savage_blitz and tName ~= "") then
                 self:AddAnnouncement(zo_strformat(GetString(RAIDNOTIFIER_ALERTS_ROCKGROVE_SAVAGE_BLITZ), tName), "rockgrove", "oaxiltso_savage_blitz")
             end
