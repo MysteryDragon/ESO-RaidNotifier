@@ -336,6 +336,7 @@ do ------------------
 			taleria_rapid_deluge = 0, -- "Off"
 		},
 		sanityEdge = {
+			ansuul_sunburst = 0, -- "Off"
 		},
 		dbg = {
 			enable = false,
@@ -607,6 +608,7 @@ function RaidNotifier:CreateSettingsMenu()
 			taleria_rapid_deluge = off_self_all,
 		},
 		sanityEdge = {
+			ansuul_sunburst = off_self_all,
 		},
 	}
 
@@ -1843,6 +1845,12 @@ function RaidNotifier:CreateSettingsMenu()
 
 	-- Sanity's Edge
 	MakeSubmenu(L.Settings_SanityEdge_Header, RaidNotifier:GetRaidDescription(RAID_SANITY_EDGE))
+	MakeControlEntry({
+		type = "dropdown",
+		name = L.Settings_SanityEdge_Ansuul_Sunburst,
+		tooltip = L.Settings_SanityEdge_Ansuul_Sunburst_TT,
+		choices = choices.sanityEdge.ansuul_sunburst,
+	}, "sanityEdge", "ansuul_sunburst")
 	subTable = nil --end submenu
 
 	MakeControlEntry({
