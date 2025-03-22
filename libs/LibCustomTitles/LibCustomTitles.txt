@@ -1,0 +1,15 @@
+## Title: LibCustomTitlesRN
+## Description: RaidNotifier's optional internal library to support custom titles for those who greatly contributed to this addon in the past.
+## APIVersion: 101045
+## Author: Kyoma
+## AddOnVersion: 20
+## Version: 20
+## IsLibrary: true
+## OptionalDependsOn: LibStub>=7
+
+LibTitleLocale.lua
+LibCustomTitles.lua
+Titles/Kyoma.lua
+Titles/Woeler.lua
+Titles/Valve.lua
+Titles/Memus.lua

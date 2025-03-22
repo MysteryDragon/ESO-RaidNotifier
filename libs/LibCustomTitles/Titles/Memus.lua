@@ -1,8 +1,8 @@
 local MY_MODULE_NAME = "Memus"
 local MY_MODULE_VERSION = 11
 
-if not LibStub then return end
-local LCC = LibStub('LibCustomTitlesRN')
+local LCC = LibStub and LibStub('LibCustomTitlesRN') or LibCustomTitlesRN
+
 if not LCC then return end
 
 local MY_MODULE = LCC:RegisterModule(MY_MODULE_NAME, MY_MODULE_VERSION)

@@ -7,8 +7,9 @@ Total: 115 titles
 
 local libLoaded
 local LIB_NAME, VERSION = "LibTitleLocale", 4
-if not LibStub then return end
-local lib, oldminor = LibStub:NewLibrary(LIB_NAME, VERSION)
+
+local lib = LibStub and LibStub:NewLibrary(LIB_NAME, VERSION) or LibCustomTitlesRN
+
 if not lib then return end
 
 local LocaleTitles =
