@@ -695,4 +695,7 @@ local sanity_edge = {}
 -- Ansuul's Sunburst
 sanity_edge.ansuul_sunburst = 199344
 
+-- Poison mechanic on Ansuul's fight
+sanity_edge.ansuul_poison = 184710
+
 RaidNotifier.BuffsDebuffs[RAID_SANITY_EDGE] = sanity_edge

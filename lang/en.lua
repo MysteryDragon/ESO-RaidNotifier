@@ -697,10 +697,14 @@ L.Settings_SanityEdge_Header                       = "Sanity's Edge"
 -- Settings
 L.Settings_SanityEdge_Ansuul_Sunburst              = "Ansuul: Sunburst"
 L.Settings_SanityEdge_Ansuul_Sunburst_TT           = "..."
+L.Settings_SanityEdge_Ansuul_Poison                = "Ansuul: Poison"
+L.Settings_SanityEdge_Ansuul_Poison_TT             = "..."
 
 -- Alerts
 L.Alerts_SanityEdge_Ansuul_Sunburst                = "|c00ddffSunburst|r at you!"
 L.Alerts_SanityEdge_Ansuul_Sunburst_Other          = "|c00ddffSunburst|r at <<!aC:1>>|r"
+L.Alerts_SanityEdge_Ansuul_Poison                  = "|c008C22Poison|r at you!"
+L.Alerts_SanityEdge_Ansuul_Poison_Other            = "|c008C22Poison|r at <<!aC:1>>|r"
 
 
 --------------------------------

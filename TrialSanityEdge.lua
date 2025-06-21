@@ -34,4 +34,15 @@ function RaidNotifier.SE.OnCombatEvent(_, result, _, _, _, _, _, _, tName, tType
             end
         end
     end
+
+    if (result == ACTION_RESULT_EFFECT_GAINED_DURATION) then
+        -- Ansuul's Poison
+        if (abilityId == buffsDebuffs.ansuul_poison and settings.ansuul_poison > 0) then
+            if (tType == COMBAT_UNIT_TYPE_PLAYER) then
+                self:AddAnnouncement(GetString(RAIDNOTIFIER_ALERTS_SANITYEDGE_ANSUUL_POISON), "sanityEdge", "ansuul_poison")
+            elseif (settings.ansuul_poison == 2 and tName ~= "") then
+                self:AddAnnouncement(zo_strformat(GetString(RAIDNOTIFIER_ALERTS_SANITYEDGE_ANSUUL_POISON_OTHER), tName), "sanityEdge", "ansuul_poison")
+            end
+        end
+    end
 end
