@@ -26,7 +26,10 @@ function RaidNotifier.SE.OnCombatEvent(_, result, _, _, _, _, _, _, tName, tType
 
     if (result == ACTION_RESULT_BEGIN) then
         -- Ansuul's Sunburst
-        if (abilityId == buffsDebuffs.ansuul_sunburst and settings.ansuul_sunburst > 0) then
+        if (abilityId == buffsDebuffs.exarchanic_yaseyla_fire_bomb and settings.exarchanic_yaseyla_fire_bomb) then
+            self:AddAnnouncement(GetString(RAIDNOTIFIER_ALERTS_SANITYEDGE_EXARCHANICYASEYLA_FIREBOMB), "sanityEdge", "exarchanic_yaseyla_fire_bomb")
+        -- Ansuul's Sunburst
+        elseif (abilityId == buffsDebuffs.ansuul_sunburst and settings.ansuul_sunburst > 0) then
             if (tType == COMBAT_UNIT_TYPE_PLAYER) then
                 self:AddAnnouncement(GetString(RAIDNOTIFIER_ALERTS_SANITYEDGE_ANSUUL_SUNBURST), "sanityEdge", "ansuul_sunburst")
             elseif (settings.ansuul_sunburst == 2 and tName ~= "") then

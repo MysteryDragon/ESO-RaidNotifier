@@ -692,6 +692,9 @@ RaidNotifier.BuffsDebuffs[RAID_DREADSAIL_REEF] = dreadsail_reef
 -- -- ---------------------------------------------------
 local sanity_edge = {}
 
+-- Exarchanic Yaseyla's Fire Bomb Toss
+sanity_edge.exarchanic_yaseyla_fire_bomb = 183660
+
 -- Meteors on Chimera's fight
 sanity_edge.chimera_meteor = 198613
 

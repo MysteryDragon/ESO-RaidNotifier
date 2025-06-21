@@ -336,6 +336,7 @@ do ------------------
 			taleria_rapid_deluge = 0, -- "Off"
 		},
 		sanityEdge = {
+			exarchanic_yaseyla_fire_bomb = false,
 			chimera_meteor = 0, -- "Off
 			ansuul_sunburst = 0, -- "Off"
 			ansuul_poison = 0, -- "Off"
@@ -1849,6 +1850,11 @@ function RaidNotifier:CreateSettingsMenu()
 
 	-- Sanity's Edge
 	MakeSubmenu(L.Settings_SanityEdge_Header, RaidNotifier:GetRaidDescription(RAID_SANITY_EDGE))
+	MakeControlEntry({
+		type = "checkbox",
+		name = L.Settings_SanityEdge_ExarchanicYaseyla_FireBomb,
+		tooltip = L.Settings_SanityEdge_ExarchanicYaseyla_FireBomb_TT,
+	}, "sanityEdge", "exarchanic_yaseyla_fire_bomb")
 	MakeControlEntry({
 		type = "dropdown",
 		name = L.Settings_SanityEdge_Chimera_Meteor,

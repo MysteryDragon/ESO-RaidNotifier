@@ -695,6 +695,8 @@ L.Alerts_DreadsailReef_Rapid_Deluge_Other          = "|cFF0000<<!aC:1>>|r got |c
 --------------------------------
 L.Settings_SanityEdge_Header                       = "Sanity's Edge"
 -- Settings
+L.Settings_SanityEdge_ExarchanicYaseyla_FireBomb   = "Exarchanic Yaseyla: Fire Bomb Toss"
+L.Settings_SanityEdge_ExarchanicYaseyla_FireBomb_TT= "..."
 L.Settings_SanityEdge_Chimera_Meteor               = "Chimera: Meteor"
 L.Settings_SanityEdge_Chimera_Meteor_TT            = "..."
 L.Settings_SanityEdge_Ansuul_Sunburst              = "Ansuul: Sunburst"
@@ -703,6 +705,7 @@ L.Settings_SanityEdge_Ansuul_Poison                = "Ansuul: Poison"
 L.Settings_SanityEdge_Ansuul_Poison_TT             = "..."
 
 -- Alerts
+L.Alerts_SanityEdge_ExarchanicYaseyla_FireBomb     = "Incoming |cff9500Fire Bombs|r"
 L.Alerts_SanityEdge_Chimera_Meteor                 = "|cff9500Meteor|r at you!"
 L.Alerts_SanityEdge_Chimera_Meteor_Other           = "|cff9500Meteor|r at <<!aC:1>>|r"
 L.Alerts_SanityEdge_Ansuul_Sunburst                = "|c00ddffSunburst|r at you!"
