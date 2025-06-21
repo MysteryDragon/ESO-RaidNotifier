@@ -692,6 +692,9 @@ RaidNotifier.BuffsDebuffs[RAID_DREADSAIL_REEF] = dreadsail_reef
 -- -- ---------------------------------------------------
 local sanity_edge = {}
 
+-- Meteors on Chimera's fight
+sanity_edge.chimera_meteor = 198613
+
 -- Ansuul's Sunburst
 sanity_edge.ansuul_sunburst = 199344
 
